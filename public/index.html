@@ -3,609 +3,597 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ambo Town Municipal Food Recovery System</title>
+    <title>Ambo Town Food Recovery Network</title>
+    <!-- Modern Typography: Playfair Display for headers & Plus Jakarta Sans for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --ethiopian-gold: #D4AF37;
-            --ethiopian-green: #0B6623;
-            --ethiopian-red: #8B0000;
-            --dark-charcoal: #121212;
-            --light-bg: #F8F9FA;
-            --glass-card: rgba(255, 255, 255, 0.96);
+            --lux-gold: #D4AF37;
+            --lux-gold-bright: #F3E5AB;
+            --lux-emerald: #0A2E1D;
+            --lux-dark-bg: #070D0B;
+            --glass-card: rgba(15, 28, 22, 0.75);
+            --glass-border: rgba(212, 175, 55, 0.3);
+            --text-light: #F4F6F5;
+            --text-muted: #A3B8AC;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: var(--light-bg);
-            color: #2D2D2D;
-            line-height: 1.6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(180deg, rgba(7, 13, 11, 0.92) 0%, rgba(5, 10, 8, 0.96) 100%),
+                        url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1920&q=80') center/cover fixed no-repeat;
+            color: var(--text-light);
+            line-height: 1.7;
+            overflow-x: hidden;
         }
 
-        /* Top Bar & Language Selector */
-        .top-bar {
-            background-color: var(--dark-charcoal);
-            color: #fff;
-            padding: 8px 20px;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        h1, h2, h3, .logo {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.5px;
         }
 
-        .lang-container label {
-            font-size: 0.85rem;
-            margin-right: 8px;
-            color: var(--ethiopian-gold);
-            font-weight: 600;
-        }
-
-        .lang-container select {
-            background: #222;
-            color: #fff;
-            border: 1px solid var(--ethiopian-gold);
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            outline: none;
-            cursor: pointer;
-        }
-
-        /* Navigation Bar */
+        /* NAVIGATION BAR */
         nav {
-            background-color: var(--dark-charcoal);
-            border-bottom: 4px solid var(--ethiopian-gold);
-            padding: 1rem 2rem;
+            background: rgba(7, 13, 11, 0.85);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1.3rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            flex-wrap: wrap;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        nav h1 {
-            color: #fff;
-            font-size: 1.3rem;
-            letter-spacing: 1px;
+        nav .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #FFF;
+            text-transform: uppercase;
         }
 
-        nav h1 span {
-            color: var(--ethiopian-gold);
+        nav .logo span {
+            color: var(--lux-gold);
+            font-style: italic;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 15px;
-            flex-wrap: wrap;
+            gap: 25px;
         }
 
         nav ul li a {
-            color: #fff;
+            color: var(--text-muted);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
             font-size: 0.95rem;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
         }
 
         nav ul li a:hover {
-            color: var(--ethiopian-gold);
+            color: var(--lux-gold-bright);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
         }
 
-        /* Hero Banner */
+        /* HERO SECTION */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.72)),
-                        url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-            color: #fff;
+            padding: 130px 20px 100px 20px;
             text-align: center;
-            padding: 90px 20px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(7, 13, 11, 0.95) 100%),
+                        url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1920&q=80') center/cover;
+            border-bottom: 1px solid var(--glass-border);
         }
 
-        .hero h2 {
-            font-size: 2.2rem;
-            color: var(--ethiopian-gold);
-            margin-bottom: 15px;
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--lux-gold-bright);
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.9);
+            font-weight: 800;
         }
 
         .hero p {
-            max-width: 750px;
+            max-width: 850px;
             margin: 0 auto;
-            font-size: 1.1rem;
+            font-size: 1.25rem;
+            color: var(--text-light);
+            font-weight: 300;
         }
 
         .container {
-            max-width: 1100px;
-            margin: 40px auto;
+            max-width: 1200px;
+            margin: 60px auto;
             padding: 0 20px;
         }
 
         .section-title {
             text-align: center;
-            font-size: 1.8rem;
-            color: var(--ethiopian-green);
-            margin-bottom: 25px;
+            font-size: 2.4rem;
+            color: var(--lux-gold);
+            margin-bottom: 45px;
             position: relative;
         }
 
         .section-title::after {
             content: '';
             display: block;
-            width: 60px;
-            height: 4px;
-            background: var(--ethiopian-gold);
-            margin: 8px auto 0 auto;
-            border-radius: 2px;
+            width: 70px;
+            height: 2px;
+            background: var(--lux-gold);
+            margin: 12px auto 0 auto;
+            box-shadow: 0 0 10px var(--lux-gold);
         }
 
+        /* ORGANIZATION OVERVIEW */
+        .about-org-box {
+            background: var(--glass-card);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 70px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        @media (max-width: 850px) {
+            .about-org-box { grid-template-columns: 1fr; }
+        }
+
+        .about-org-box h2 {
+            color: var(--lux-gold-bright);
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .about-org-box img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+        }
+
+        /* FOODRECOVERY CATEGORIES */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-bottom: 70px;
+        }
+
+        .category-card {
+            background: var(--glass-card);
+            padding: 32px 25px;
+            border-radius: 14px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transition: all 0.4s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--lux-gold);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+        }
+
+        .category-card h3 {
+            color: var(--lux-gold-bright);
+            margin-bottom: 14px;
+            font-size: 1.4rem;
+        }
+
+        /* PORTAL & FORMS */
         .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 35px;
+            margin-bottom: 70px;
         }
 
         .card {
             background: var(--glass-card);
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-            border-top: 4px solid var(--ethiopian-green);
+            padding: 35px;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
         }
 
-        /* Forms */
+        .card h3 {
+            color: var(--lux-gold-bright);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
         form label {
             display: block;
-            margin-top: 12px;
-            font-weight: bold;
+            margin-top: 18px;
+            font-weight: 600;
+            color: var(--text-muted);
             font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         form input, form select, form textarea {
             width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            padding: 14px;
+            margin-top: 8px;
+            background: rgba(5, 10, 8, 0.7);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 8px;
+            color: #FFF;
             font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        form input:focus, form select:focus, form textarea:focus {
+            border-color: var(--lux-gold);
         }
 
         button {
-            margin-top: 18px;
+            margin-top: 25px;
             width: 100%;
-            padding: 12px;
-            background-color: var(--ethiopian-green);
-            color: #fff;
+            padding: 15px;
+            background: linear-gradient(135deg, #D4AF37 0%, #997A15 100%);
+            color: #070D0B;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 1rem;
-            font-weight: bold;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.25);
         }
 
         button:hover {
-            background-color: #074a19;
+            background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(212, 175, 55, 0.4);
         }
 
-        /* Developers Showcase */
-        .team-grid {
+        /* ABOUT US - UNIFIED TEAM PHOTO */
+        .team-section {
+            background: var(--glass-card);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 70px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px);
+        }
+
+        .team-img-container {
+            margin: 25px auto;
+            max-width: 850px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 2px solid var(--glass-border);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+        }
+
+        .team-img-container img {
+            width: 100%;
+            height: auto;
+            max-height: 480px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* COMMUNITY LEADERS PHOTO GRID */
+        .profile-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            gap: 25px;
+            margin-bottom: 35px;
         }
 
-        .team-card {
-            background: #fff;
-            padding: 15px;
+        .profile-card {
+            background: var(--glass-card);
+            padding: 25px 20px;
             text-align: center;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border-bottom: 4px solid var(--ethiopian-gold);
+            border-radius: 14px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
         }
 
-        .team-card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 2px solid var(--ethiopian-gold);
-            margin-bottom: 12px;
+        .profile-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--lux-gold);
         }
 
-        .team-card h4 {
-            color: var(--dark-charcoal);
-            font-size: 1rem;
-        }
-
-        /* Community Leaders Photos */
-        .community-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .community-card {
-            background: #fff;
-            padding: 15px;
-            text-align: center;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            border-top: 3px solid var(--ethiopian-red);
-        }
-
-        .community-card img {
-            width: 110px;
-            height: 110px;
+        .profile-card img {
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--ethiopian-gold);
-            margin-bottom: 10px;
+            border: 2px solid var(--lux-gold);
+            margin-bottom: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
         }
 
-        /* FAQ Styling */
-        .faq-item {
-            background: #fff;
-            padding: 18px;
+        .profile-card h4 {
+            color: #FFF;
+            font-size: 1.15rem;
+            margin-bottom: 4px;
+        }
+
+        .profile-card p {
+            color: var(--lux-gold-bright);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* FEEDBACK & FAQS */
+        .feedback-entry {
+            background: rgba(5, 10, 8, 0.6);
+            padding: 14px;
             border-radius: 8px;
             margin-bottom: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            border-left: 4px solid var(--ethiopian-red);
+            border-left: 3px solid var(--lux-gold);
+        }
+
+        .faq-item {
+            background: var(--glass-card);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 18px;
+            border: 1px solid var(--glass-border);
+            border-left: 4px solid var(--lux-gold);
         }
 
         .faq-item h3 {
-            font-size: 1rem;
-            color: var(--dark-charcoal);
-            margin-bottom: 6px;
-        }
-
-        .feedback-entry {
-            background: #f0f0f0;
-            padding: 10px;
-            border-radius: 5px;
+            color: var(--lux-gold-bright);
             margin-bottom: 8px;
-            font-size: 0.9rem;
+            font-size: 1.2rem;
         }
 
         footer {
-            background-color: var(--dark-charcoal);
-            color: #fff;
+            background: rgba(5, 10, 8, 0.95);
             text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            border-top: 4px solid var(--ethiopian-gold);
+            padding: 30px;
+            margin-top: 80px;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
             font-size: 0.9rem;
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            .hero h2 {
-                font-size: 1.7rem;
-            }
         }
     </style>
 </head>
 <body>
 
-    <!-- TOP BAR: MULTI-LANGUAGE SELECTOR -->
-    <div class="top-bar">
-        <div class="lang-container">
-            <label for="langSelect" id="lblLang">Language / Afaan / ቋንቋ:</label>
-            <select id="langSelect" onchange="changeLanguage(this.value)">
-                <option value="en" selected>English</option>
-                <option value="om">Afaan Oromoo</option>
-                <option value="am">አማርኛ (Amharic)</option>
-                <option value="ti">ትግርኛ (Tigrinya)</option>
-                <option value="so">Soomaali (Somali)</option>
-            </select>
-        </div>
-    </div>
-
-    <!-- NAVIGATION BAR -->
+    <!-- LUXURY NAVIGATION -->
     <nav>
-        <h1>Ambo Food <span>Recovery</span></h1>
+        <div class="logo">Ambo Food <span>Recovery</span></div>
         <ul>
-            <li><a href="#about-us" id="navAboutDev">Developers</a></li>
-            <li><a href="#about-org" id="navAboutOrg">Organization</a></li>
-            <li><a href="#portal" id="navPortal">Portal</a></li>
-            <li><a href="#community" id="navCommunity">Community</a></li>
-            <li><a href="#faq" id="navFaq">FAQs</a></li>
+            <li><a href="#about-org">Organization</a></li>
+            <li><a href="#categories">Categories</a></li>
+            <li><a href="#portal">Portal</a></li>
+            <li><a href="#team">Our Team</a></li>
+            <li><a href="#community">Community</a></li>
+            <li><a href="#faq">FAQs</a></li>
         </ul>
     </nav>
 
-    <!-- HERO HEADER -->
+    <!-- HERO BANNER -->
     <header class="hero">
-        <h2 id="heroTitle">Municipal Food Recovery & Redistribution System</h2>
-        <p id="heroDesc">Empowering Ambo Town by connecting surplus food donors with recipient distribution centers to stop waste and uplift vulnerable communities.</p>
+        <h1>Stop Food Waste. Feed Ambo Town.</h1>
+        <p>A sophisticated municipal framework bridging excess food resources with verified local redistribution centers across Ambo Town.</p>
     </header>
 
     <div class="container">
 
-        <!-- ABOUT US SECTION (DEVELOPERS & SCHOOL) -->
-        <section id="about-us" style="margin-bottom: 50px;">
-            <h2 class="section-title" id="titleDev">About Us — The Developers</h2>
-            <div class="card">
-                <p id="descDev">We are students from <strong>AMBO IFA BORU SPECIAL BOARDING SECONDARY SCHOOL</strong>. We learned full-stack web development through the specialized training program at the <strong>AMBO UNIVERSITY STEM CENTER</strong>. As passionate young developers, we have mastered modern programming courses and are currently working on software solutions to solve real-world problems in our home town of Ambo.</p>
-                
-                <div class="team-grid">
-                    <div class="team-card">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80" alt="Developer 1">
-                        <h4>Developer 1</h4>
-                        <p style="font-size:0.85rem; color:#666;">Full-Stack Engineer</p>
-                    </div>
-                    <div class="team-card">
-                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=500&q=80" alt="Developer 2">
-                        <h4>Developer 2</h4>
-                        <p style="font-size:0.85rem; color:#666;">Backend Specialist</p>
-                    </div>
-                    <div class="team-card">
-                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=500&q=80" alt="Developer 3">
-                        <h4>Developer 3</h4>
-                        <p style="font-size:0.85rem; color:#666;">Frontend Specialist</p>
-                    </div>
-                    <div class="team-card">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80" alt="Developer 4">
-                        <h4>Developer 4</h4>
-                        <p style="font-size:0.85rem; color:#666;">UI/UX Lead</p>
-                    </div>
+        <!-- ORGANIZATION OVERVIEW -->
+        <section id="about-org">
+            <div class="about-org-box">
+                <div>
+                    <h2>Ambo Town Food Recovery Organization</h2>
+                    <p>The <strong>Ambo Town Food Recovery Organization</strong> operates as a pioneering municipal initiative dedicated to solving food insecurity and eliminating organic waste. Built around modern food recovery architecture, our platform orchestrates real-time logistical handoffs between commercial suppliers (hotels, restaurants, agricultural markets) and distribution hubs across Ambo Town.</p>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=800&q=80" alt="Fresh Prepared Community Meals">
                 </div>
             </div>
         </section>
 
-        <!-- ABOUT AMBO TOWN FOOD ORGANIZATION CENTER -->
-        <section id="about-org" style="margin-bottom: 50px;">
-            <h2 class="section-title" id="titleOrg">Ambo Town Food Organization Center</h2>
-            <div class="card">
-                <p id="descOrg">The <strong>Ambo Town Municipal Food Recovery Organization</strong> provides dedicated civic logistics connecting local food businesses, hotels, and agricultural donors with distribution networks. Managed under municipal leadership with administrative oversight from <strong>Mr. Hachalu</strong>, our service ensures that surplus food is safely redirected to those who need it most across all districts of Ambo Town.</p>
+        <!-- FOODRECOVERY CATEGORIES -->
+        <section id="categories">
+            <h2 class="section-title">Food Recovery Categories</h2>
+            <div class="category-grid">
+                <div class="category-card">
+                    <h3>1. Commercial Donors</h3>
+                    <p>Hotels, restaurants, and market vendors listing fresh, safe food surpluses for scheduled recovery.</p>
+                </div>
+                <div class="category-card">
+                    <h3>2. Recipient Agencies</h3>
+                    <p>Community care initiatives and regional distribution sites receiving direct food allocations.</p>
+                </div>
+                <div class="category-card">
+                    <h3>3. Logistics Network</h3>
+                    <p>Structured community channels ensuring rapid and safe food transportation across municipal sectors.</p>
+                </div>
+                <div class="category-card">
+                    <h3>4. Municipal Tracking</h3>
+                    <p>Data analytics monitoring total rescued meals and localized community impact in Ambo Town.</p>
+                </div>
             </div>
         </section>
 
-        <!-- REDISTRIBUTION PORTAL FORMS -->
+        <!-- REDISTRIBUTION PORTAL -->
         <section id="portal">
-            <h2 class="section-title" id="titlePortal">Redistribution Portal</h2>
+            <h2 class="section-title">Redistribution Portal</h2>
             <div class="grid-2">
                 <!-- Donor Form -->
                 <div class="card">
-                    <h3 id="formDonorHeading">Food Donor Form</h3>
+                    <h3>Food Donor Form</h3>
                     <form id="donorForm">
-                        <label id="lblDonorName">Donor / Business Name</label>
-                        <input type="text" id="donorName" placeholder="e.g., Ambo Ethiopian Hotel" required>
+                        <label>Donor / Business Name</label>
+                        <input type="text" id="donorName" placeholder="e.g., Ambo Hotel" required>
                         
-                        <label id="lblFoodItem">Food Item Description</label>
+                        <label>Food Description</label>
                         <input type="text" id="foodItem" placeholder="e.g., Prepared meals, fresh produce" required>
                         
-                        <label id="lblQuantity">Quantity / Packets</label>
-                        <input type="text" id="quantity" placeholder="e.g., 40 packages" required>
+                        <label>Quantity / Units</label>
+                        <input type="text" id="quantity" placeholder="e.g., 50 packages" required>
 
-                        <button type="submit" id="btnDonorSubmit">Submit Food Surplus</button>
+                        <button type="submit">Submit Food Surplus</button>
                     </form>
                 </div>
 
-                <!-- Acceptor Form -->
+                <!-- Recipient Form -->
                 <div class="card">
-                    <h3 id="formAcceptorHeading">Recipient Request Form</h3>
+                    <h3>Recipient Agency Form</h3>
                     <form id="acceptorForm">
-                        <label id="lblAcceptorName">Recipient Center</label>
-                        <input type="text" id="acceptorName" placeholder="e.g., Local Community Center" required>
+                        <label>Agency Name</label>
+                        <input type="text" id="acceptorName" placeholder="e.g., Kebele Youth Center" required>
                         
-                        <label id="lblCategory">Required Category</label>
+                        <label>Food Category Required</label>
                         <select id="foodCategory">
                             <option value="Prepared Meals">Prepared Meals</option>
-                            <option value="Grains & Produce">Grains & Produce</option>
-                            <option value="Packaged Food">Packaged Food</option>
+                            <option value="Dry Grains / Produce">Dry Grains / Produce</option>
+                            <option value="Packaged Items">Packaged Items</option>
                         </select>
 
-                        <label id="lblLocation">Ambo Pickup / Sector</label>
-                        <input type="text" id="pickupPoint" placeholder="e.g., Kebele 02 Distribution Point" required>
+                        <label>District Sector / Location</label>
+                        <input type="text" id="pickupPoint" placeholder="e.g., Kebele 03 Center" required>
 
-                        <button type="submit" id="btnAcceptorSubmit">Request Distribution</button>
+                        <button type="submit">Request Distribution</button>
                     </form>
                 </div>
             </div>
         </section>
 
-        <!-- COMMUNITY MEMBERS & FEEDBACK -->
-        <section id="community" style="margin-bottom: 50px;">
-            <h2 class="section-title" id="titleCommunity">Community Leaders & Feedback</h2>
+        <!-- ABOUT US (DEVELOPMENT TEAM) -->
+        <section id="team">
+            <div class="team-section">
+                <h2 class="section-title">About Us</h2>
+                <p style="max-width: 850px; margin: 0 auto; font-size: 1.1rem; color: var(--text-muted);">
+                    We are a dedicated team of student software developers from <strong>Ambo Ifa Boru Special Boarding Secondary School</strong> who completed advanced full-stack web development training at the <strong>Ambo University STEM Center</strong>. Together, we designed and engineered this digital platform to elevate municipal food recovery efforts in Ambo Town.
+                </p>
+                
+                <div class="team-img-container">
+                    <img src="images/team_photo.jpg" alt="Our Development Team" onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80'">
+                </div>
+                <p style="font-style: italic; color: var(--lux-gold-bright); font-weight: 600;">Development Team — Ambo University STEM Center Alumni</p>
+            </div>
+        </section>
+
+        <!-- COMMUNITY LEADERS & GOVERNANCE -->
+        <section id="community" style="margin-bottom: 70px;">
+            <h2 class="section-title">Community Input & Governance</h2>
             
-            <!-- Community Photos Section -->
-            <div class="community-grid">
-                <div class="community-card">
-                    <img src="images/mr_tena_feyisa.jpg" alt="Mr. Tena Feyisa" onerror="this.src='https://via.placeholder.com/110?text=Tena+Feyisa'">
+            <!-- THE 3 COMMUNITY LEADER PHOTOS -->
+            <div class="profile-grid">
+                <div class="profile-card">
+                    <img src="images/mr_tena_feyisa.jpg" alt="Mr. Tena Feyisa" onerror="this.src='https://via.placeholder.com/120?text=Tena+Feyisa'">
                     <h4>Mr. Tena Feyisa</h4>
-                    <p style="font-size:0.8rem; color:#666;">Community Liaison</p>
+                    <p>Community Coordinator</p>
                 </div>
-                <div class="community-card">
-                    <img src="images/mr_dechasa_yadeta.jpg" alt="Mr. Dechasa Yadeta" onerror="this.src='https://via.placeholder.com/110?text=Dechasa+Yadeta'">
+                <div class="profile-card">
+                    <img src="images/mr_dechasa_yadeta.jpg" alt="Mr. Dechasa Yadeta" onerror="this.src='https://via.placeholder.com/120?text=Dechasa+Yadeta'">
                     <h4>Mr. Dechasa Yadeta</h4>
-                    <p style="font-size:0.8rem; color:#666;">Redistribution Advisor</p>
+                    <p>Logistics Advisor</p>
                 </div>
-                <div class="community-card">
-                    <img src="images/ms_marsimoy_shawul.jpg" alt="Ms. Marsimoy Shawul" onerror="this.src='https://via.placeholder.com/110?text=Marsimoy+Shawul'">
+                <div class="profile-card">
+                    <img src="images/ms_marsimoy_shawul.jpg" alt="Ms. Marsimoy Shawul" onerror="this.src='https://via.placeholder.com/120?text=Marsimoy+Shawul'">
                     <h4>Ms. Marsimoy Shawul</h4>
-                    <p style="font-size:0.8rem; color:#666;">Public Coordinator</p>
+                    <p>Public Liaison</p>
                 </div>
             </div>
 
-            <div class="grid-2" style="margin-top: 30px;">
+            <div class="grid-2" style="margin-top: 40px;">
                 <div class="card">
-                    <h3 id="headingFeedbackForm">Submit Community Feedback</h3>
+                    <h3>Submit Community Feedback</h3>
                     <form id="feedbackForm">
-                        <label id="lblFbName">Your Name</label>
-                        <input type="text" id="fbName" placeholder="Enter full name" required>
+                        <label>Your Name</label>
+                        <input type="text" id="fbName" placeholder="Enter your name" required>
                         
-                        <label id="lblFbMsg">Feedback / Observation</label>
-                        <textarea id="fbMessage" rows="3" placeholder="Share your suggestions or observations..." required></textarea>
+                        <label>Feedback / Suggestions</label>
+                        <textarea id="fbMessage" rows="3" placeholder="Share your suggestions..." required></textarea>
 
-                        <button type="submit" id="btnFbSubmit">Submit Feedback</button>
+                        <button type="submit">Submit Feedback</button>
                     </form>
                 </div>
 
                 <div class="card">
-                    <h3 id="headingFeedbackLogs">Recent Feedback Logs</h3>
-                    <div class="feedback-list" id="feedbackList" style="margin-top:10px; max-height: 200px; overflow-y: auto;">
+                    <h3>Community Log Entries</h3>
+                    <div id="feedbackList" style="margin-top:15px; max-height: 250px; overflow-y: auto;">
                         <div class="feedback-entry">
-                            <strong>Mr. Tena Feyisa:</strong> Distribution timing in Sector 2 was structured efficiently.
+                            <strong>Mr. Tena Feyisa:</strong> Food recovery routes in District 2 executed smoothly.
                         </div>
                         <div class="feedback-entry">
-                            <strong>Ms. Marsimoy Shawul:</strong> Donor registration interface is intuitive and easy to access.
+                            <strong>Ms. Marsimoy Shawul:</strong> Donor registration portal operating at full efficiency.
                         </div>
                         <div class="feedback-entry">
-                            <strong>Mr. Dechasa Yadeta:</strong> Verified local municipal redistribution schedules with district officials.
+                            <strong>Mr. Dechasa Yadeta:</strong> Verified pickup schedules with regional officers.
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- FAQs SECTION -->
+        <!-- FAQS SECTION -->
         <section id="faq">
-            <h2 class="section-title" id="titleFaq">Frequently Asked Questions</h2>
+            <h2 class="section-title">Frequently Asked Questions</h2>
             
             <div class="faq-item">
-                <h3 id="faq1Q">1. Who manages municipal food operations in Ambo Town?</h3>
-                <p id="faq1A">Operations and district logistics are coordinated under municipal leadership with guidance from Mr. Hachalu and community coordinators.</p>
+                <h3>1. Who manages municipal administration for this project?</h3>
+                <p>System oversight and administrative approvals are managed under municipal leadership by Mr. Hachalu.</p>
             </div>
 
             <div class="faq-item">
-                <h3 id="faq2Q">2. How do local residents access services in their native language?</h3>
-                <p id="faq2A">Use the language selector at the top right corner to switch between Afaan Oromoo, Amharic, English, Tigrinya, and Somali instantly.</p>
+                <h3>2. How are food donations matched to recipients?</h3>
+                <p>Donors submit surplus entries through the portal, allowing recipient organizations to claim allocations in real time.</p>
             </div>
 
             <div class="faq-item">
-                <h3 id="faq3Q">3. Who developed this software platform?</h3>
-                <p id="faq3A">This application was developed by full-stack developers from Ambo Ifa Boru Special Boarding Secondary School trained at the Ambo University STEM Center.</p>
+                <h3>3. Who engineered this platform?</h3>
+                <p>Students from Ambo Ifa Boru Special Boarding Secondary School, trained at the Ambo University STEM Center.</p>
             </div>
 
             <div class="faq-item">
-                <h3 id="faq4Q">4. How is community input collected?</h3>
-                <p id="faq4A">Inputs from leaders like Mr. Tena Feyisa, Ms. Marsimoy Shawul, and Mr. Dechasa Yadeta are stored using local persistent storage to ensure continuous feedback.</p>
-            </div>
-
-            <div class="faq-item">
-                <h3 id="faq5Q">5. Is this food recovery service free?</h3>
-                <p id="faq5A">Yes, this is a 100% free municipal service aimed at reducing food waste and supporting local welfare across Ambo Town.</p>
+                <h3>4. Is this service free?</h3>
+                <p>Yes, this is a completely free public service platform dedicated to serving Ambo Town.</p>
             </div>
         </section>
 
     </div>
 
-    <!-- FOOTER -->
     <footer>
-        <p>&copy; 2026 Ambo Town Food Recovery System | Administrative Lead: Mr. Hachalu</p>
+        <p>&copy; 2026 Ambo Town Food Recovery Network | Administrative Lead: Mr. Hachalu</p>
     </footer>
 
-    <!-- INTERACTIVE SCRIPT & LANGUAGE DICTIONARY -->
     <script>
-        // Language Translations Object
-        const translations = {
-            en: {
-                heroTitle: "Municipal Food Recovery & Redistribution System",
-                heroDesc: "Empowering Ambo Town by connecting surplus food donors with recipient distribution centers to stop waste and uplift vulnerable communities.",
-                titleDev: "About Us — The Developers",
-                descDev: "We are students from AMBO IFA BORU SPECIAL BOARDING SECONDARY SCHOOL. We learned full-stack web development through the specialized training program at the AMBO UNIVERSITY STEM CENTER. As passionate young developers, we have mastered modern programming courses and are currently working on software solutions to solve real-world problems in our home town of Ambo.",
-                titleOrg: "Ambo Town Food Organization Center",
-                descOrg: "The Ambo Town Municipal Food Recovery Organization provides dedicated civic logistics connecting local food businesses, hotels, and agricultural donors with distribution networks. Managed under municipal leadership with administrative oversight from Mr. Hachalu, our service ensures that surplus food is safely redirected to those who need it most across all districts of Ambo Town.",
-                titlePortal: "Redistribution Portal",
-                formDonorHeading: "Food Donor Form",
-                formAcceptorHeading: "Recipient Request Form",
-                btnDonorSubmit: "Submit Food Surplus",
-                btnAcceptorSubmit: "Request Distribution",
-                titleCommunity: "Community Leaders & Feedback",
-                titleFaq: "Frequently Asked Questions"
-            },
-            om: {
-                heroTitle: "Sirna Nyata Birmadummaan Walitti Qabuu fi Raabsu Magaalaa Amboo",
-                heroDesc: "Gumaacha nyaata garbaa qaban walitti qabuun addaan kutuu fi deeggarsa hawaasa magaalaa Amboof kennuu.",
-                titleDev: "Abee-Oromoo — Barattoota Misoomsan",
-                descDev: "Nuyi barattoota MANA BARUMSA ADDAA BULTII IFA BORU AMBOO ti. Barnoota Misooma Weebii Guutuu (Full-Stack) Wiirtuu STEM Yuunivarsiitii Ambootti baranne. Qulqullina sammuu fi dandeettii saganteessuu guddifachuun giddu-galeessa keenya Magaalaa Amboof sagantaa kanaan oomishne.",
-                titleOrg: "Giddu-Galeessa Nyaata Magaalaa Amboo",
-                descOrg: "Jaarmiyaan Nyaata Magaalaa Amboo tajaajila koodii fi loojistikiin obbo Hacaaluun durfamuun nyaata garbaa oomishame gara hawaasa oolchuuf hojjeta.",
-                titlePortal: "Portaala Raabsa Nyaataa",
-                formDonorHeading: "Unka Arjooma Nyaataa",
-                formAcceptorHeading: "Unka Gaaffii Nyaataa",
-                btnDonorSubmit: "Nyaata Galchuun Arjoomi",
-                btnAcceptorSubmit: "Raabsa Gaafadhu",
-                titleCommunity: "Gorsitoota Hawaasaa fi Yaada",
-                titleFaq: "Gaaffilee Yeroo Baay'ee Gaafataman"
-            },
-            am: {
-                heroTitle: "የአምቦ ከተማ የምግብ ശേഖር እና ስርጭት ስርዓት",
-                heroDesc: "በአምቦ ከተማ የተረፈ ምግቦችን ከተለጋሾች ሰብስቦ ለችግረኞች የሚያደርስ ማህበረሰባዊ አገልግሎት።",
-                titleDev: "ስለ እኛ — አልሚዎች",
-                descDev: "እኛ የአምቦ ኢፋ ቦሩ ልዩ ቦርዲንግ ሁለተኛ ደረጃ ትምህርት ቤት ተማሪዎች ነን። በስራችን ሙሉ የዌብ ልማት (Full-Stack) ትምህርትን በአምቦ ዩኒቨርሲቲ STEM ማዕከል ተማርናል። በአሁኑ ወቅት የፕሮግራሚንግ እውቀታችንን በመጠቀም ለአምቦ ከተማችን መፍትሔዎችን እያዘጋጀን እንገኛለን።",
-                titleOrg: "የአምቦ ከተማ የምግብ ድርጅት ማዕከል",
-                descOrg: "በአቶ ሀጫሉ አደራጅነት እና በከተማው አስተዳደር የሚመራው ማዕከላችን የተረፈ የምግብ ምርቶችን በትክክል ለሚፈልጉት ወገኖች ያደርሳል።",
-                titlePortal: "የምግብ ስርጭት ፖርታል",
-                formDonorHeading: "የምግብ ለጋሽ ፎርም",
-                formAcceptorHeading: "የምግብ ተቀባይ ፎርም",
-                btnDonorSubmit: "ምግብ ያስመዝግቡ",
-                btnAcceptorSubmit: "ስርጭት ይጠይቁ",
-                titleCommunity: "የማህበረሰብ መሪዎች እና አስተያየት",
-                titleFaq: "ተደጋግመው የሚጠየቁ ጥያቄዎች"
-            },
-            ti: {
-                heroTitle: "ስርዓት ምእራይን ምክፋልን መግቢ ከተማ አምቦ",
-                heroDesc: "ኣብ ከተማ አምቦ ዝተረፈ መግቢ ብምእራይ ንዝደልዩ ወገናት ዘብጽሕ ማሕበራዊ ኣገልግሎት።",
-                titleDev: "ብዛዕባና — ኣልማዕቲ",
-                descDev: "ንሕና ተማህሮ ፍሉይ ኣwebserva Bording ካልኣይ ደረጃ ተማህሮ ኢፋ ቦሩ አምቦ ኢና። ኣብ STEM ማእከል ዩኒቨርሲቲ አምቦ ትምህርቲ ዌብ ዲቨሎፕመንት ተማሂርና።",
-                titleOrg: "ማእከል መግቢ ከተማ አምቦ",
-                descOrg: "ብኣቶ ሃጫሉ ዝመራሕ ማእከልና ንተረፍቲ መግቢ ብግቡእ ንዝደልዩ ሰባት የስ hisሕ።",
-                titlePortal: "ፖርታል ምክፋል መግቢ",
-                formDonorHeading: "ፎርም ለጋሲ መግቢ",
-                formAcceptorHeading: "ፎርም ተቀባሊ መግቢ",
-                btnDonorSubmit: "መግቢ ኣእትው",
-                btnAcceptorSubmit: "ምክፋል ሕተት",
-                titleCommunity: "መራሕቲ ማሕበረሰብን ርእይቶን",
-                titleFaq: "ብተደጋጋሚ ዝሕተቱ ሕቶታት"
-            },
-            so: {
-                heroTitle: "Nidaamka Badbaadinta iyo Qaybinta Cuntada Magaalada Ambo",
-                heroDesc: "U adeegida magaalada Ambo ngokuxiriirinta dadka cuntada bixiya iyo kuwa u baahan.",
-                titleDev: "Naga Saabsan — Horumarinta",
-                descDev: "Waxaan nahay ardayda Dugsiga Sare ee Ifa Boru Ambo. Waxaan koorsada Full-stack ku baranay Xarunta STEM ee Jaamacadda Ambo.",
-                titleOrg: "Xarunta Cuntada Magaalada Ambo",
-                descOrg: "Xaruntu waxay hoos tagtaa maamulka Mr. Hachalu si loo caawiyo bulshada Ambo.",
-                titlePortal: "Barta Qaybinta Cuntada",
-                formDonorHeading: "Foomka Bixinta Cuntada",
-                formAcceptorHeading: "Foomka Codsiga Cuntada",
-                btnDonorSubmit: "Geli Cuntada",
-                btnAcceptorSubmit: "Codso Qaybinta",
-                titleCommunity: "Hogaamiyaasha Bulshada",
-                titleFaq: "Su'aalaha Badanaaba La Isweydiiyo"
-            }
-        };
-
-        function changeLanguage(lang) {
-            const data = translations[lang] || translations['en'];
-            for (let key in data) {
-                let el = document.getElementById(key);
-                if (el) el.innerText = data[key];
-            }
-        }
-
-        // Form Event Listeners
         document.getElementById('donorForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Donation entry logged successfully!');
+            alert('Surplus food entry logged successfully!');
             this.reset();
         });
 
         document.getElementById('acceptorForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Distribution request logged for review!');
+            alert('Recipient request logged successfully!');
             this.reset();
         });
 
@@ -619,10 +607,6 @@
             newEntry.className = 'feedback-entry';
             newEntry.innerHTML = `<strong>${name}:</strong> ${msg}`;
             list.prepend(newEntry);
-
-            let stored = JSON.parse(localStorage.getItem('ambo_feedback') || '[]');
-            stored.push({ name: name, message: msg });
-            localStorage.setItem('ambo_feedback', JSON.stringify(stored));
 
             this.reset();
         });
