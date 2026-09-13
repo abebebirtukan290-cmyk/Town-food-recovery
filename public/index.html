@@ -307,7 +307,7 @@
             margin-top: 5px;
         }
 
-        /* TEAM PHOTO OPTIMIZED CONTAINER */
+        /* OPTIMIZED TEAM PHOTO CONTAINER FOR 4-PERSON ASPECT RATIO */
         .team-section {
             background: var(--glass-card);
             border-radius: 16px;
@@ -331,7 +331,7 @@
 
         .team-img-container img {
             width: 100%;
-            height: auto; /* Maintains natural 16:9 ratio to show all 4 faces cleanly */
+            height: auto;
             display: block;
             border-radius: 10px;
             object-fit: contain;
@@ -658,7 +658,9 @@
         <p>&copy; 2026 Ambo Town Food Recovery Network | Administrative Lead: Mr. Hachalu</p>
     </footer>
 
+    <!-- EMBEDDED JAVASCRIPT LOGIC -->
     <script>
+        // Toggle Cash/Food Fields
         function toggleDonationType(val) {
             if (val === 'Cash Contribution') {
                 document.getElementById('foodField').style.display = 'none';
@@ -669,7 +671,7 @@
             }
         }
 
-        // Donor Form Eligibility Check
+        // Donor Form Processing & 5,000 Birr Threshold Enforcement
         document.getElementById('donorForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const income = Number(document.getElementById('donorIncome').value);
@@ -693,7 +695,7 @@
             toggleDonationType('Food Surplus');
         });
 
-        // Recipient Form Eligibility Check
+        // Recipient Form Processing & 5,000 Birr Threshold Enforcement
         document.getElementById('acceptorForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const income = Number(document.getElementById('recIncome').value);
@@ -715,7 +717,7 @@
             this.reset();
         });
 
-        // Feedback Form
+        // Feedback Dynamic Form
         document.getElementById('feedbackForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('fbName').value;

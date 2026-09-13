@@ -1,156 +1,127 @@
-require('dotenv').config();
 const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
+const mongoose = require('mongoose');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 const path = require('path');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret_key';
+const JWT_SECRET = process.env.JWT_SECRET || 'ambo_recovery_secret_key_2026';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/ambo_food_recovery';
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Database Setup
-const db = new sqlite3.Database('./recovery.db', (err) => {
-  if (err) console.error('Database connection error:', err.message);
-  else console.log('Connected to SQLite database (recovery.db).');
+// Database Connection
+mongoose.connect(MONGO_URI)
+  .then(() => console.log('Connected to MongoDB successfully'))
+  .catch(err => console.error('MongoDB connection error:', err));
+
+// Database Schemas
+const DonorSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  householdSize: { type: Number, required: true },
+  income: { type: Number, required: true },
+  type: { type: String, required: true },
+  details: { type: String },
+  amountETB: { type: Number, default: 0 },
+  createdAt: { type: Date, default: Date.now }
 });
 
-// Initialize Database Tables & Seed Data
-db.serialize(() => {
-  db.run(`
-    CREATE TABLE IF NOT EXISTS records (
-      id TEXT PRIMARY KEY,
-      name TEXT NOT NULL,
-      job TEXT NOT NULL,
-      salary REAL NOT NULL,
-      family INTEGER NOT NULL,
-      extraInfo TEXT NOT NULL,
-      address TEXT NOT NULL,
-      roleType TEXT NOT NULL,
-      urgent INTEGER NOT NULL DEFAULT 0,
-      verified INTEGER NOT NULL DEFAULT 1,
-      createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
-    )
-  `);
-
-  // Seed default community records if empty
-  db.get("SELECT COUNT(*) AS count FROM records", (err, row) => {
-    if (row && row.count === 0) {
-      const stmt = db.prepare(`
-        INSERT INTO records (id, name, job, salary, family, extraInfo, address, roleType, urgent, verified)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      `);
-      stmt.run('REC-101', 'Mr. Tena Feyisa', 'Hotel Merchant', 1800, 3, 'Surplus Hotel Meals', 'Central Town', 'Donor', 0, 1);
-      stmt.run('REC-102', 'Ms. Marsimoy Shawul', 'Retail Assistant', 450, 5, 'Family Food Aid Request', 'West District', 'Acceptor', 0, 1);
-      stmt.run('REC-103', 'Mr. Dechasa Yadeta', 'Town Business Owner', 2200, 2, 'Direct Micro-Grants & Dry Goods', 'Central Town', 'Donor', 0, 1);
-      stmt.finalize();
-      console.log('Default community records seeded successfully.');
-    }
-  });
+const RecipientSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  householdSize: { type: Number, required: true },
+  income: { type: Number, required: true },
+  category: { type: String, required: true },
+  location: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now }
 });
 
-// Middleware: Verify JWT Admin Token
-function authenticateAdminToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
+const Donor = mongoose.model('Donor', DonorSchema);
+const Recipient = mongoose.model('Recipient', RecipientSchema);
 
-  if (!token) return res.status(401).json({ error: 'Access denied. Admin token required.' });
+// Admin Auth Middleware
+const verifyAdminToken = (req, res, next) => {
+  const token = req.headers['authorization'];
+  if (!token) return res.status(401).json({ error: 'Access denied.' });
 
-  jwt.verify(token, JWT_SECRET, (err, user) => {
-    if (err) return res.status(403).json({ error: 'Invalid or expired token.' });
-    req.user = user;
+  try {
+    const verified = jwt.verify(token.replace('Bearer ', ''), JWT_SECRET);
+    req.admin = verified;
     next();
-  });
-}
+  } catch (err) {
+    res.status(400).json({ error: 'Invalid token.' });
+  }
+};
 
-// API Route: Login (Mr. Hachalu Admin)
-app.post('/api/login', (req, res) => {
+// API Routes
+app.post('/api/donors', async (req, res) => {
+  try {
+    const { name, householdSize, income, type, details, amountETB } = req.body;
+    if (income <= 5000) return res.status(400).json({ error: 'Income must be > 5000 ETB for donors.' });
+    const donor = new Donor({ name, householdSize, income, type, details, amountETB });
+    await donor.save();
+    res.status(201).json({ message: 'Donor registered successfully.' });
+  } catch (err) {
+    res.status(500).json({ error: 'Database save error.' });
+  }
+});
+
+app.post('/api/recipients', async (req, res) => {
+  try {
+    const { name, householdSize, income, category, location } = req.body;
+    if (income > 5000) return res.status(400).json({ error: 'Income must be <= 5000 ETB for recipients.' });
+    const recipient = new Recipient({ name, householdSize, income, category, location });
+    await recipient.save();
+    res.status(201).json({ message: 'Recipient request logged.' });
+  } catch (err) {
+    res.status(500).json({ error: 'Database save error.' });
+  }
+});
+
+app.post('/api/admin/login', (req, res) => {
   const { username, password } = req.body;
-  
-  if (username === 'hachalu_admin' && password === 'AdminSecure2026!') {
-    const token = jwt.sign({ username, role: 'admin' }, JWT_SECRET, { expiresIn: '12h' });
+  const ADMIN_USER = process.env.ADMIN_USER || 'hachalu';
+  const ADMIN_PASS = process.env.ADMIN_PASS || 'ambo2026';
+
+  if (username === ADMIN_USER && password === ADMIN_PASS) {
+    const token = jwt.sign({ username: 'Mr. Hachalu' }, JWT_SECRET, { expiresIn: '8h' });
     return res.json({ success: true, token });
   }
-  return res.status(401).json({ error: 'Invalid username or password.' });
+  return res.status(401).json({ success: false, error: 'Invalid credentials.' });
 });
 
-// API Route: Public Registration with $1,000 Salary Gating Policy
-app.post('/api/register', (req, res) => {
-  const { name, job, salary, family, type, address } = req.body;
+app.get('/api/admin/dashboard', verifyAdminToken, async (req, res) => {
+  try {
+    const totalDonors = await Donor.countDocuments();
+    const totalRecipients = await Recipient.countDocuments();
+    const cashDonations = await Donor.aggregate([
+      { $match: { type: 'Cash Contribution' } },
+      { $group: { _id: null, total: { $sum: '$amountETB' } } }
+    ]);
+    const recentDonors = await Donor.find().sort({ createdAt: -1 }).limit(5);
+    const recentRecipients = await Recipient.find().sort({ createdAt: -1 }).limit(5);
 
-  if (!name || !job || salary === undefined || !family || !type || !address) {
-    return res.status(400).json({ error: 'All fields are required.' });
-  }
-
-  const numericSalary = parseFloat(salary);
-  const numericFamily = parseInt(family, 10);
-
-  // Policy Rule: Salary > $1000 = Donor, Salary <= $1000 = Acceptor
-  const roleType = numericSalary > 1000 ? 'Donor' : 'Acceptor';
-  const urgent = (roleType === 'Acceptor' && (numericSalary <= 150 || numericFamily >= 5)) ? 1 : 0;
-  const id = 'REC-' + Math.floor(1000 + Math.random() * 9000);
-
-  const stmt = db.prepare(`
-    INSERT INTO records (id, name, job, salary, family, extraInfo, address, roleType, urgent, verified)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
-  `);
-
-  stmt.run(id, name, job, numericSalary, numericFamily, type, address, roleType, urgent, function(err) {
-    if (err) return res.status(500).json({ error: 'Failed to record entry in database.' });
-    res.json({ success: true, id, roleType, urgent });
-  });
-  stmt.finalize();
-});
-
-// API Route: Fetch Public Verified Listings
-app.get('/api/public/listings', (req, res) => {
-  db.all("SELECT id, name, extraInfo, address, roleType, urgent FROM records WHERE verified = 1 ORDER BY createdAt DESC", [], (err, rows) => {
-    if (err) return res.status(500).json({ error: 'Database read failure.' });
-    res.json(rows);
-  });
-});
-
-// API Route: Admin Dashboard - Get All Records
-app.get('/api/admin/records', authenticateAdminToken, (req, res) => {
-  db.all("SELECT * FROM records ORDER BY createdAt DESC", [], (err, rows) => {
-    if (err) return res.status(500).json({ error: 'Database read failure.' });
-    res.json(rows);
-  });
-});
-
-// API Route: Admin Dashboard - Toggle Verification Status
-app.patch('/api/admin/verify/:id', authenticateAdminToken, (req, res) => {
-  const { id } = req.params;
-  db.get("SELECT verified FROM records WHERE id = ?", [id], (err, row) => {
-    if (err || !row) return res.status(404).json({ error: 'Record not found.' });
-    
-    const newStatus = row.verified === 1 ? 0 : 1;
-    db.run("UPDATE records SET verified = ? WHERE id = ?", [newStatus, id], (err) => {
-      if (err) return res.status(500).json({ error: 'Update failed.' });
-      res.json({ success: true, verified: newStatus });
+    res.json({
+      totalDonors,
+      totalRecipients,
+      totalCashETB: cashDonations[0] ? cashDonations[0].total : 0,
+      recentDonors,
+      recentRecipients
     });
-  });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch dashboard data.' });
+  }
 });
 
-// API Route: Admin Dashboard - Delete Record
-app.delete('/api/admin/delete/:id', authenticateAdminToken, (req, res) => {
-  const { id } = req.params;
-  db.run("DELETE FROM records WHERE id = ?", [id], function(err) {
-    if (err) return res.status(500).json({ error: 'Delete failed.' });
-    res.json({ success: true });
-  });
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
-// Serve Single Page Application Fallback
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`Server executing at http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
