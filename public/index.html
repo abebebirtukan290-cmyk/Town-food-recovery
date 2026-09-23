@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ambo Town Food Recovery Network</title>
-    <!-- Google Fonts -->
+    <!-- Google Fonts matching the reference UI -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --lux-gold: #D4AF37;
-            --lux-gold-bright: #F3E5AB;
-            --lux-dark-bg: #070D0B;
-            --glass-card: rgba(15, 28, 22, 0.85);
-            --glass-border: rgba(212, 175, 55, 0.3);
-            --text-light: #F4F6F5;
-            --text-muted: #A3B8AC;
+            --bg-dark: #000000;
+            --nav-bg: rgba(0, 0, 0, 0.92);
+            --card-bg: #091712;
+            --card-border: #132b21;
+            --accent-green: #1e3d30;
+            --btn-bg: #11281e;
+            --btn-hover: #19382b;
+            --text-main: #ffffff;
+            --text-sub: #cfd8d3;
+            --gold-accent: #cca450;
         }
 
         * {
@@ -27,205 +30,198 @@
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: linear-gradient(180deg, rgba(7, 13, 11, 0.92) 0%, rgba(5, 10, 8, 0.96) 100%),
-                        url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1920&q=80') center/cover fixed no-repeat;
-            color: var(--text-light);
-            line-height: 1.7;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
             overflow-x: hidden;
-        }
-
-        h1, h2, h3, .logo {
-            font-family: 'Playfair Display', serif;
-            letter-spacing: 0.5px;
         }
 
         /* NAVIGATION BAR */
         nav {
-            background: rgba(7, 13, 11, 0.90);
-            border-bottom: 1px solid var(--glass-border);
-            padding: 1.2rem 2.5rem;
+            background: var(--nav-bg);
+            padding: 1.2rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
         }
 
         nav .logo {
-            font-size: 1.5rem;
+            font-family: 'Bodoni Moda', serif;
+            font-size: 1.6rem;
             font-weight: 800;
-            color: #FFF;
+            color: #ffffff;
+            letter-spacing: 1px;
             text-transform: uppercase;
         }
 
         nav .logo span {
-            color: var(--lux-gold);
             font-style: italic;
+            color: var(--gold-accent);
+            font-weight: 400;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 20px;
+            gap: 24px;
+            align-items: center;
         }
 
         nav ul li a {
-            color: var(--text-muted);
+            color: #b0b8b3;
             text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
+            font-weight: 400;
+            font-size: 0.92rem;
+            transition: color 0.2s ease;
         }
 
         nav ul li a:hover {
-            color: var(--lux-gold-bright);
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            color: #ffffff;
         }
 
         /* HERO SECTION */
         .hero {
-            padding: 120px 20px 90px 20px;
+            padding: 110px 20px 80px 20px;
             text-align: center;
-            background: linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(7, 13, 11, 0.95) 100%),
-                        url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1920&q=80') center/cover;
-            border-bottom: 1px solid var(--glass-border);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.95) 100%),
+                        url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .hero h1 {
-            font-size: 3.2rem;
-            color: var(--lux-gold-bright);
-            margin-bottom: 15px;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.9);
-            font-weight: 800;
+            font-family: 'Bodoni Moda', serif;
+            font-size: 3.5rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .hero p {
-            max-width: 850px;
+            max-width: 800px;
             margin: 0 auto;
-            font-size: 1.2rem;
-            color: var(--text-light);
+            font-size: 1.15rem;
+            color: var(--text-sub);
             font-weight: 300;
+            line-height: 1.6;
         }
 
         .container {
             max-width: 1200px;
-            margin: 50px auto;
+            margin: 40px auto;
             padding: 0 20px;
         }
 
         .section-title {
+            font-family: 'Bodoni Moda', serif;
             text-align: center;
             font-size: 2.2rem;
-            color: var(--lux-gold);
-            margin-bottom: 40px;
-            position: relative;
+            color: #ffffff;
+            margin-bottom: 35px;
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 70px;
-            height: 2px;
-            background: var(--lux-gold);
-            margin: 10px auto 0 auto;
-            box-shadow: 0 0 10px var(--lux-gold);
-        }
-
-        /* ORGANIZATION OVERVIEW */
-        .about-org-box {
-            background: var(--glass-card);
-            border-radius: 16px;
+        /* CARD CONTAINERS MATCHING REFERENCE */
+        .main-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
             padding: 35px;
-            margin-bottom: 60px;
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-grid {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
-            gap: 35px;
+            gap: 30px;
             align-items: center;
         }
 
         @media (max-width: 850px) {
-            .about-org-box { grid-template-columns: 1fr; }
+            .about-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.4rem; }
         }
 
-        .about-org-box h2 {
-            color: var(--lux-gold-bright);
-            margin-bottom: 15px;
+        .about-grid h2 {
+            font-family: 'Bodoni Moda', serif;
             font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #ffffff;
         }
 
-        .about-org-box img {
+        .about-grid p {
+            color: var(--text-sub);
+            font-size: 1rem;
+        }
+
+        .about-grid img {
             width: 100%;
-            height: 280px;
+            height: 260px;
             object-fit: cover;
-            border-radius: 12px;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
         }
 
-        /* CATEGORIES */
+        /* CATEGORY GRID */
         .category-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
         }
 
         .category-card {
-            background: var(--glass-card);
-            padding: 28px 22px;
-            border-radius: 14px;
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            transition: all 0.4s ease;
-        }
-
-        .category-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--lux-gold);
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 25px;
+            border-radius: 10px;
         }
 
         .category-card h3 {
-            color: var(--lux-gold-bright);
-            margin-bottom: 12px;
-            font-size: 1.3rem;
+            font-family: 'Bodoni Moda', serif;
+            color: #ffffff;
+            margin-bottom: 10px;
+            font-size: 1.25rem;
         }
 
-        /* PORTAL & FORMS */
+        .category-card p {
+            color: var(--text-sub);
+            font-size: 0.92rem;
+        }
+
+        /* FORMS & PORTAL */
         .grid-2 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
+            gap: 25px;
+            margin-bottom: 40px;
         }
 
-        .card {
-            background: var(--glass-card);
+        .form-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
             padding: 30px;
-            border-radius: 16px;
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            border-radius: 12px;
         }
 
-        .card h3 {
-            color: var(--lux-gold-bright);
-            margin-bottom: 18px;
+        .form-card h3 {
+            font-family: 'Bodoni Moda', serif;
+            color: #ffffff;
+            margin-bottom: 20px;
             font-size: 1.4rem;
         }
 
         form label {
             display: block;
-            margin-top: 15px;
-            font-weight: 600;
-            color: var(--text-muted);
+            margin-top: 14px;
+            font-weight: 500;
+            color: #a0aba5;
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -235,49 +231,39 @@
             width: 100%;
             padding: 12px;
             margin-top: 6px;
-            background: rgba(5, 10, 8, 0.7);
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            border-radius: 8px;
-            color: #FFF;
+            background: #050d0a;
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            color: #ffffff;
             font-size: 0.95rem;
             outline: none;
         }
 
         form input:focus, form select:focus, form textarea:focus {
-            border-color: var(--lux-gold);
+            border-color: #2e5946;
         }
 
         button {
-            margin-top: 22px;
+            margin-top: 20px;
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #D4AF37 0%, #997A15 100%);
-            color: #070D0B;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 700;
+            padding: 13px;
+            background-color: var(--btn-bg);
+            color: #ffffff;
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            font-size: 0.92rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background 0.2s ease;
         }
 
         button:hover {
-            background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 100%);
-            transform: translateY(-2px);
+            background-color: var(--btn-hover);
         }
 
-        /* ADMIN DASHBOARD STYLING */
-        .admin-dashboard {
-            background: var(--glass-card);
-            border-radius: 16px;
-            padding: 35px;
-            margin-bottom: 60px;
-            border: 1px solid var(--lux-gold);
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
-        }
-
+        /* STATS & METRICS */
         .stat-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -287,111 +273,107 @@
         }
 
         .stat-card {
-            background: rgba(5, 10, 8, 0.7);
+            background: #050d0a;
             padding: 20px;
-            border-radius: 10px;
-            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
             text-align: center;
         }
 
         .stat-card h4 {
-            color: var(--text-muted);
-            font-size: 0.85rem;
+            color: #8c9992;
+            font-size: 0.82rem;
             text-transform: uppercase;
         }
 
         .stat-card .number {
             font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--lux-gold-bright);
+            font-weight: 700;
+            color: #ffffff;
             margin-top: 5px;
         }
 
-        /* OPTIMIZED TEAM PHOTO CONTAINER FOR 4-PERSON ASPECT RATIO */
-        .team-section {
-            background: var(--glass-card);
-            border-radius: 16px;
-            padding: 35px;
-            text-align: center;
-            margin-bottom: 60px;
-            border: 1px solid var(--glass-border);
-        }
-
+        /* TEAM SECTION */
         .team-img-container {
             margin: 25px auto;
-            max-width: 1000px;
+            max-width: 900px;
             width: 100%;
-            background: rgba(5, 10, 8, 0.8);
-            border-radius: 16px;
+            background: #050d0a;
+            border-radius: 10px;
             overflow: hidden;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
-            padding: 12px;
+            border: 1px solid var(--card-border);
+            padding: 10px;
         }
 
         .team-img-container img {
             width: 100%;
             height: auto;
             display: block;
-            border-radius: 10px;
-            object-fit: contain;
+            border-radius: 6px;
         }
 
         /* COMMUNITY LEADERS */
         .profile-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-            margin-bottom: 35px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
         .profile-card {
-            background: var(--glass-card);
-            padding: 25px 20px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 22px 15px;
             text-align: center;
-            border-radius: 14px;
-            border: 1px solid var(--glass-border);
+            border-radius: 10px;
         }
 
         .profile-card img {
-            width: 110px;
-            height: 110px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--lux-gold);
+            border: 1px solid var(--card-border);
             margin-bottom: 12px;
         }
 
         .feedback-entry {
-            background: rgba(5, 10, 8, 0.6);
+            background: #050d0a;
             padding: 12px;
-            border-radius: 8px;
+            border-radius: 6px;
             margin-bottom: 10px;
-            border-left: 3px solid var(--lux-gold);
+            border-left: 3px solid #2e5946;
+            font-size: 0.9rem;
         }
 
         .faq-item {
-            background: var(--glass-card);
-            padding: 22px;
-            border-radius: 12px;
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
             margin-bottom: 15px;
-            border-left: 4px solid var(--lux-gold);
+            border: 1px solid var(--card-border);
         }
 
         .faq-item h3 {
-            color: var(--lux-gold-bright);
+            font-family: 'Bodoni Moda', serif;
+            color: #ffffff;
             margin-bottom: 8px;
             font-size: 1.15rem;
         }
 
+        .faq-item p {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+        }
+
         footer {
-            background: rgba(5, 10, 8, 0.95);
+            background-color: #000000;
             text-align: center;
             padding: 30px;
-            margin-top: 70px;
-            border-top: 1px solid var(--glass-border);
-            color: var(--text-muted);
-            font-size: 0.9rem;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: #717d77;
+            font-size: 0.88rem;
         }
     </style>
 </head>
@@ -408,10 +390,11 @@
             <li><a href="#team">Our Team</a></li>
             <li><a href="#community">Community</a></li>
             <li><a href="#faq">FAQs</a></li>
+            <li><a href="/admin" style="color: #ffffff;">Admin Login</a></li>
         </ul>
     </nav>
 
-    <!-- HERO HEADER -->
+    <!-- HERO HEADER MATCHING SCREENSHOT -->
     <header class="hero">
         <h1>Stop Food Waste. Feed Ambo Town.</h1>
         <p>A sophisticated municipal framework bridging excess food and financial resources with verified local recipient centers across Ambo Town.</p>
@@ -421,13 +404,15 @@
 
         <!-- ORGANIZATION OVERVIEW -->
         <section id="about-org">
-            <div class="about-org-box">
-                <div>
-                    <h2>Ambo Town Food Recovery Organization</h2>
-                    <p>The <strong>Ambo Town Food Recovery Organization</strong> operates as a municipal system fighting food insecurity and reducing waste. Our platform coordinates real-time recovery between commercial sources (hotels, restaurants, agricultural hubs) and local distribution sectors in Ambo Town.</p>
-                </div>
-                <div>
-                    <img src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=800&q=80" alt="Fresh Food Allocation">
+            <div class="main-card">
+                <div class="about-grid">
+                    <div>
+                        <h2>Ambo Town Food Recovery Organization</h2>
+                        <p>The <strong>Ambo Town Food Recovery Organization</strong> operates as a municipal system fighting food insecurity and reducing waste. Our platform coordinates real-time recovery between commercial sources (hotels, restaurants, agricultural hubs) and local distribution sectors in Ambo Town.</p>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=800&q=80" alt="Fresh Food Allocation">
+                    </div>
                 </div>
             </div>
         </section>
@@ -460,15 +445,15 @@
             <h2 class="section-title">Redistribution Portal</h2>
             <div class="grid-2">
                 
-                <!-- Donor Registration / Form -->
-                <div class="card">
+                <!-- Donor Form -->
+                <div class="form-card">
                     <h3>Food & Cash Donor Form</h3>
                     <form id="donorForm">
                         <label>Donor / Organization Name</label>
                         <input type="text" id="donorName" placeholder="e.g., Ambo Hotel" required>
                         
                         <label>Household Members / Organization Size</label>
-                        <input type="number" id="donorHousehold" placeholder="e.g., 4" required>
+                        <input type="number" id="donorHousehold" placeholder="e.g., 4" required min="1">
 
                         <label>Monthly Income (ETB)</label>
                         <input type="number" id="donorIncome" placeholder="e.g., 8000 (Must be > 5000 ETB)" required>
@@ -486,22 +471,22 @@
 
                         <div id="cashField" style="display: none;">
                             <label>Amount (ETB)</label>
-                            <input type="number" id="cashAmount" placeholder="e.g., 1000 ETB">
+                            <input type="number" id="cashAmount" placeholder="e.g., 1000 ETB" min="0">
                         </div>
 
                         <button type="submit">Submit Contribution</button>
                     </form>
                 </div>
 
-                <!-- Recipient Registration / Form -->
-                <div class="card">
+                <!-- Recipient Form -->
+                <div class="form-card">
                     <h3>Recipient Request Form</h3>
                     <form id="acceptorForm">
                         <label>Agency / Household Head Name</label>
                         <input type="text" id="acceptorName" placeholder="e.g., Kebele 03 Center" required>
                         
                         <label>Household Members</label>
-                        <input type="number" id="recHousehold" placeholder="e.g., 5" required>
+                        <input type="number" id="recHousehold" placeholder="e.g., 5" required min="1">
 
                         <label>Monthly Household Income (ETB)</label>
                         <input type="number" id="recIncome" placeholder="e.g., 3500 (Must be <= 5000 ETB)" required>
@@ -523,37 +508,31 @@
             </div>
         </section>
 
-        <!-- ADMIN DASHBOARD FOR MR. HACHALU -->
+        <!-- PUBLIC DASHBOARD -->
         <section id="dashboard">
             <h2 class="section-title">Administrative Control Dashboard</h2>
-            <div class="admin-dashboard">
-                <p style="color: var(--lux-gold-bright); font-weight: 600;">System Administrator: Mr. Hachalu | Municipal Oversight</p>
+            <div class="main-card">
+                <p style="color: #ffffff; font-weight: 500;">System Administrator: Mr. Hachalu | Municipal Oversight</p>
                 
                 <div class="stat-grid">
                     <div class="stat-card">
-                        <h4>Monthly Food Recovered</h4>
-                        <div class="number" id="statMonthlyFood">1,240 Packs</div>
+                        <h4>Total Active Donors</h4>
+                        <div class="number" id="statDonors">0</div>
                     </div>
                     <div class="stat-card">
-                        <h4>Yearly Food Recovered</h4>
-                        <div class="number" id="statYearlyFood">14,850 Packs</div>
+                        <h4>Total Active Recipients</h4>
+                        <div class="number" id="statRecipients">0</div>
                     </div>
                     <div class="stat-card">
                         <h4>Total Cash Raised</h4>
-                        <div class="number" id="statCash">45,200 ETB</div>
-                    </div>
-                    <div class="stat-card">
-                        <h4>Verified Recipients</h4>
-                        <div class="number" id="statRecipients">312 Households</div>
+                        <div class="number" id="statCash">0 ETB</div>
                     </div>
                 </div>
 
-                <div class="card" style="background: rgba(5,10,8,0.8);">
-                    <h3 style="font-size: 1.1rem;">Live Administrative Transaction Log</h3>
-                    <div id="adminLog" style="max-height: 180px; overflow-y: auto; font-size: 0.9rem; margin-top: 10px;">
-                        <div class="feedback-entry">[System] Monthly verification cycle active. Oversight: Mr. Hachalu.</div>
-                        <div class="feedback-entry">[Approved] Ambo Hotel donated 40 prepared meal packs.</div>
-                        <div class="feedback-entry">[Verified] Recipient household (Income &le; 5000 ETB) approved at Kebele 02.</div>
+                <div class="form-card" style="margin-top: 20px;">
+                    <h3 style="font-size: 1.1rem;">Live System Event Log</h3>
+                    <div id="adminLog" style="max-height: 180px; overflow-y: auto; margin-top: 10px;">
+                        <div class="feedback-entry">[System] Verification cycle active. Oversight: Mr. Hachalu.</div>
                     </div>
                 </div>
             </div>
@@ -561,43 +540,43 @@
 
         <!-- ABOUT US (TEAM PHOTO) -->
         <section id="team">
-            <div class="team-section">
+            <div class="main-card" style="text-align: center;">
                 <h2 class="section-title">About Us</h2>
-                <p style="max-width: 850px; margin: 0 auto; font-size: 1.05rem; color: var(--text-muted);">
+                <p style="max-width: 850px; margin: 0 auto; color: var(--text-sub);">
                     We are student software developers from <strong>Ambo Ifa Boru Special Boarding Secondary School</strong> trained at the <strong>Ambo University STEM Center</strong>. Together, we designed and engineered this digital platform to serve our community in Ambo Town.
                 </p>
                 
                 <div class="team-img-container">
                     <img src="images/team_photo.jpg" alt="Our Development Team" onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80'">
                 </div>
-                <p style="font-style: italic; color: var(--lux-gold-bright); font-weight: 600;">Development Team — Ambo University STEM Center Alumni</p>
+                <p style="font-style: italic; color: #a0aba5; font-size: 0.95rem;">Development Team — Ambo University STEM Center Alumni</p>
             </div>
         </section>
 
-        <!-- COMMUNITY LEADERS & FEEDBACK -->
-        <section id="community" style="margin-bottom: 60px;">
+        <!-- COMMUNITY LEADERS -->
+        <section id="community">
             <h2 class="section-title">Community Input & Governance</h2>
             
             <div class="profile-grid">
                 <div class="profile-card">
-                    <img src="images/mr_tena_feyisa.jpg" alt="Mr. Tena Feyisa" onerror="this.src='https://via.placeholder.com/110?text=Tena+Feyisa'">
-                    <h4>Mr. Tena Feyisa</h4>
-                    <p style="color: var(--lux-gold-bright); font-size: 0.85rem;">Community Coordinator</p>
+                    <img src="images/mr_tena_feyisa.jpg" alt="Mr. Tena Feyisa" onerror="this.src='https://via.placeholder.com/90?text=Tena+Feyisa'">
+                    <h4 style="color: #ffffff;">Mr. Tena Feyisa</h4>
+                    <p style="color: var(--text-sub); font-size: 0.85rem;">Community Coordinator</p>
                 </div>
                 <div class="profile-card">
-                    <img src="images/mr_dechasa_yadeta.jpg" alt="Mr. Dechasa Yadeta" onerror="this.src='https://via.placeholder.com/110?text=Dechasa+Yadeta'">
-                    <h4>Mr. Dechasa Yadeta</h4>
-                    <p style="color: var(--lux-gold-bright); font-size: 0.85rem;">Logistics Advisor</p>
+                    <img src="images/mr_dechasa_yadeta.jpg" alt="Mr. Dechasa Yadeta" onerror="this.src='https://via.placeholder.com/90?text=Dechasa+Yadeta'">
+                    <h4 style="color: #ffffff;">Mr. Dechasa Yadeta</h4>
+                    <p style="color: var(--text-sub); font-size: 0.85rem;">Logistics Advisor</p>
                 </div>
                 <div class="profile-card">
-                    <img src="images/ms_marsimoy_shawul.jpg" alt="Ms. Marsimoy Shawul" onerror="this.src='https://via.placeholder.com/110?text=Marsimoy+Shawul'">
-                    <h4>Ms. Marsimoy Shawul</h4>
-                    <p style="color: var(--lux-gold-bright); font-size: 0.85rem;">Public Liaison</p>
+                    <img src="images/ms_marsimoy_shawul.jpg" alt="Ms. Marsimoy Shawul" onerror="this.src='https://via.placeholder.com/90?text=Marsimoy+Shawul'">
+                    <h4 style="color: #ffffff;">Ms. Marsimoy Shawul</h4>
+                    <p style="color: var(--text-sub); font-size: 0.85rem;">Public Liaison</p>
                 </div>
             </div>
 
-            <div class="grid-2" style="margin-top: 30px;">
-                <div class="card">
+            <div class="grid-2">
+                <div class="form-card">
                     <h3>Submit Community Feedback</h3>
                     <form id="feedbackForm">
                         <label>Your Name</label>
@@ -610,7 +589,7 @@
                     </form>
                 </div>
 
-                <div class="card">
+                <div class="form-card">
                     <h3>Community Log Entries</h3>
                     <div id="feedbackList" style="margin-top:15px; max-height: 220px; overflow-y: auto;">
                         <div class="feedback-entry">
@@ -658,9 +637,24 @@
         <p>&copy; 2026 Ambo Town Food Recovery Network | Administrative Lead: Mr. Hachalu</p>
     </footer>
 
-    <!-- EMBEDDED JAVASCRIPT LOGIC -->
+    <!-- EMBEDDED JAVASCRIPT -->
     <script>
-        // Toggle Cash/Food Fields
+        document.addEventListener('DOMContentLoaded', fetchPublicStats);
+
+        async function fetchPublicStats() {
+            try {
+                const res = await fetch('/api/public/stats');
+                if (res.ok) {
+                    const data = await res.json();
+                    document.getElementById('statDonors').innerText = data.totalDonors;
+                    document.getElementById('statRecipients').innerText = data.totalRecipients;
+                    document.getElementById('statCash').innerText = `${Number(data.totalCashETB).toLocaleString()} ETB`;
+                }
+            } catch (err) {
+                console.error('Failed to load public stats:', err);
+            }
+        }
+
         function toggleDonationType(val) {
             if (val === 'Cash Contribution') {
                 document.getElementById('foodField').style.display = 'none';
@@ -671,53 +665,88 @@
             }
         }
 
-        // Donor Form Processing & 5,000 Birr Threshold Enforcement
-        document.getElementById('donorForm').addEventListener('submit', function(e) {
+        document.getElementById('donorForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const income = Number(document.getElementById('donorIncome').value);
             const name = document.getElementById('donorName').value;
+            const householdSize = Number(document.getElementById('donorHousehold').value);
+            const income = Number(document.getElementById('donorIncome').value);
             const type = document.getElementById('donationType').value;
+            const details = document.getElementById('foodItem').value;
+            const amountETB = Number(document.getElementById('cashAmount').value);
 
             if (income <= 5000) {
-                alert('Notice: Income must be above 5000 Birr/month to register as a Donor. Households below 5000 Birr qualify for Recipient allocations.');
+                alert('Notice: Income must be strictly greater than 5000 Birr/month to register as a Donor.');
                 return;
             }
 
-            alert('Thank you! Donor contribution logged successfully.');
-            
-            const log = document.getElementById('adminLog');
-            const entry = document.createElement('div');
-            entry.className = 'feedback-entry';
-            entry.innerHTML = `[Approved Donor] ${name} submitted ${type}. Income verified (>5000 ETB).`;
-            log.prepend(entry);
+            try {
+                const res = await fetch('/api/donors', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, householdSize, income, type, details, amountETB })
+                });
 
-            this.reset();
-            toggleDonationType('Food Surplus');
+                const data = await res.json();
+
+                if (res.ok) {
+                    alert('Thank you! Donor contribution saved to MongoDB.');
+                    const log = document.getElementById('adminLog');
+                    const entry = document.createElement('div');
+                    entry.className = 'feedback-entry';
+                    entry.innerHTML = `[Saved to DB] ${name} submitted ${type}. Income verified (>5000 ETB).`;
+                    log.prepend(entry);
+
+                    this.reset();
+                    toggleDonationType('Food Surplus');
+                    fetchPublicStats();
+                } else {
+                    alert(data.error || 'Failed to submit donor record.');
+                }
+            } catch (err) {
+                alert('Network error communicating with server.');
+            }
         });
 
-        // Recipient Form Processing & 5,000 Birr Threshold Enforcement
-        document.getElementById('acceptorForm').addEventListener('submit', function(e) {
+        document.getElementById('acceptorForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const income = Number(document.getElementById('recIncome').value);
             const name = document.getElementById('acceptorName').value;
+            const householdSize = Number(document.getElementById('recHousehold').value);
+            const income = Number(document.getElementById('recIncome').value);
+            const category = document.getElementById('foodCategory').value;
+            const location = document.getElementById('pickupPoint').value;
 
             if (income > 5000) {
                 alert('Notice: Recipient allocation is reserved for households with monthly income <= 5000 Birr.');
                 return;
             }
 
-            alert('Recipient request approved! Added to Mr. Hachalu’s allocation queue.');
+            try {
+                const res = await fetch('/api/recipients', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, householdSize, income, category, location })
+                });
 
-            const log = document.getElementById('adminLog');
-            const entry = document.createElement('div');
-            entry.className = 'feedback-entry';
-            entry.innerHTML = `[Approved Recipient] ${name} requested food allocation. Verified income (${income} ETB <= 5000 ETB).`;
-            log.prepend(entry);
+                const data = await res.json();
 
-            this.reset();
+                if (res.ok) {
+                    alert('Recipient allocation request saved to MongoDB!');
+                    const log = document.getElementById('adminLog');
+                    const entry = document.createElement('div');
+                    entry.className = 'feedback-entry';
+                    entry.innerHTML = `[Saved to DB] ${name} requested food. Verified income (${income} ETB <= 5000 ETB).`;
+                    log.prepend(entry);
+
+                    this.reset();
+                    fetchPublicStats();
+                } else {
+                    alert(data.error || 'Failed to submit recipient request.');
+                }
+            } catch (err) {
+                alert('Network error communicating with server.');
+            }
         });
 
-        // Feedback Dynamic Form
         document.getElementById('feedbackForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('fbName').value;

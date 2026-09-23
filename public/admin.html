@@ -2,77 +2,322 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mr. Hachalu | Admin Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #070D0B; color: #F4F6F5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .admin-card { background: rgba(15, 28, 22, 0.95); border: 1px solid #D4AF37; padding: 40px; border-radius: 16px; max-width: 600px; width: 100%; box-shadow: 0 15px 35px rgba(0,0,0,0.8); }
-        h2 { font-family: 'Playfair Display', serif; color: #F3E5AB; text-align: center; }
-        input { width: 100%; padding: 12px; margin: 8px 0 15px 0; background: #050A08; border: 1px solid rgba(212,175,55,0.3); color: #FFF; border-radius: 6px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: linear-gradient(135deg, #D4AF37, #997A15); border: none; font-weight: 700; color: #070D0B; border-radius: 6px; cursor: pointer; }
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; text-align: center; }
-        .box { background: rgba(5,10,8,0.8); padding: 15px; border-radius: 8px; border: 1px solid rgba(212,175,55,0.2); }
-        .val { font-size: 1.4rem; font-weight: bold; color: #F3E5AB; }
+        :root {
+            --bg-dark: #000000;
+            --card-bg: #091712;
+            --card-border: #132b21;
+            --btn-bg: #11281e;
+            --btn-hover: #19382b;
+            --text-main: #ffffff;
+            --text-sub: #cfd8d3;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .admin-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+        }
+
+        h2 {
+            font-family: 'Bodoni Moda', serif;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 1.8rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-sub);
+            margin-bottom: 25px;
+            font-size: 0.92rem;
+        }
+
+        form label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 500;
+            color: #a0aba5;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            background: #050d0a;
+            border: 1px solid var(--card-border);
+            color: #ffffff;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2e5946;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 22px;
+            background-color: var(--btn-bg);
+            border: 1px solid var(--card-border);
+            font-weight: 600;
+            color: #ffffff;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.2s ease;
+        }
+
+        button:hover {
+            background-color: var(--btn-hover);
+        }
+
+        .logout-btn {
+            background-color: #2e1111;
+            border-color: #4a1f1f;
+        }
+
+        .logout-btn:hover {
+            background-color: #421818;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .box {
+            background: #050d0a;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+        }
+
+        .box-title {
+            font-size: 0.82rem;
+            color: #8c9992;
+            text-transform: uppercase;
+        }
+
+        .val {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-top: 8px;
+        }
+
+        .recent-section {
+            margin-top: 25px;
+        }
+
+        .recent-section h3 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 1.1rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 6px;
+        }
+
+        .list-item {
+            background: #050d0a;
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-size: 0.88rem;
+            border-left: 3px solid #2e5946;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .error-msg {
+            color: #e74c3c;
+            font-size: 0.88rem;
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+        }
     </style>
 </head>
 <body>
+
     <div class="admin-card">
         <h2>Mr. Hachalu Administration Portal</h2>
         
+        <!-- LOGIN SECTION -->
         <div id="loginSec">
+            <p class="subtitle">Ambo Town Food Recovery Municipal Oversight</p>
             <form id="lForm">
-                <label>Username</label>
-                <input type="text" id="u" placeholder="Enter username" required>
-                <label>Password</label>
-                <input type="password" id="p" placeholder="Enter password" required>
+                <label for="u">Username</label>
+                <input type="text" id="u" placeholder="Enter admin username" required>
+                
+                <label for="p">Password</label>
+                <input type="password" id="p" placeholder="Enter admin password" required>
+                
+                <div id="loginErr" class="error-msg"></div>
+
                 <button type="submit">Login to Dashboard</button>
             </form>
         </div>
 
+        <!-- DASHBOARD SECTION -->
         <div id="dashSec" style="display:none;">
-            <p>Welcome, System Administrator Mr. Hachalu</p>
+            <p class="subtitle">Welcome, System Administrator <strong>Mr. Hachalu</strong></p>
+            
             <div class="grid">
-                <div class="box">Donors<div class="val" id="dNum">0</div></div>
-                <div class="box">Recipients<div class="val" id="rNum">0</div></div>
-                <div class="box">Cash (ETB)<div class="val" id="cNum">0</div></div>
+                <div class="box">
+                    <div class="box-title">Registered Donors</div>
+                    <div class="val" id="dNum">0</div>
+                </div>
+                <div class="box">
+                    <div class="box-title">Verified Recipients</div>
+                    <div class="val" id="rNum">0</div>
+                </div>
+                <div class="box">
+                    <div class="box-title">Cash Raised (ETB)</div>
+                    <div class="val" id="cNum">0 ETB</div>
+                </div>
             </div>
-            <button onclick="logout()" style="margin-top:20px; background: #c0392b; color:#fff;">Logout</button>
+
+            <div class="recent-section">
+                <h3>Recent Donors</h3>
+                <div id="recentDonorsList"><p style="color:var(--text-sub); font-size:0.85rem;">No recent donors recorded.</p></div>
+            </div>
+
+            <div class="recent-section">
+                <h3>Recent Recipients</h3>
+                <div id="recentRecipientsList"><p style="color:var(--text-sub); font-size:0.85rem;">No recent recipients recorded.</p></div>
+            </div>
+
+            <button onclick="logout()" class="logout-btn">Logout Session</button>
         </div>
     </div>
 
     <script>
-        const tok = localStorage.getItem('h_token');
-        if (tok) loadDash();
+        const TOKEN_KEY = 'ambo_admin_token';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const tok = localStorage.getItem(TOKEN_KEY);
+            if (tok) loadDash();
+        });
 
         document.getElementById('lForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const res = await fetch('/api/admin/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: document.getElementById('u').value, password: document.getElementById('p').value })
-            });
-            const data = await res.json();
-            if (data.success) {
-                localStorage.setItem('h_token', data.token);
-                loadDash();
-            } else { alert(data.error); }
+            const errDiv = document.getElementById('loginErr');
+            errDiv.style.display = 'none';
+
+            try {
+                const res = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        username: document.getElementById('u').value, 
+                        password: document.getElementById('p').value 
+                    })
+                });
+
+                const data = await res.json();
+
+                if (res.ok && data.success) {
+                    localStorage.setItem(TOKEN_KEY, data.token);
+                    loadDash();
+                } else {
+                    errDiv.innerText = data.error || 'Invalid admin credentials.';
+                    errDiv.style.display = 'block';
+                }
+            } catch (err) {
+                errDiv.innerText = 'Unable to connect to the authentication server.';
+                errDiv.style.display = 'block';
+            }
         });
 
         async function loadDash() {
-            const res = await fetch('/api/admin/dashboard', {
-                headers: { 'Authorization': `Bearer ${localStorage.getItem('h_token')}` }
-            });
-            if (!res.ok) return logout();
-            const data = await res.json();
-            document.getElementById('dNum').innerText = data.totalDonors;
-            document.getElementById('rNum').innerText = data.totalRecipients;
-            document.getElementById('cNum').innerText = data.totalCashETB;
-            document.getElementById('loginSec').style.display = 'none';
-            document.getElementById('dashSec').style.display = 'block';
+            try {
+                const res = await fetch('/api/admin/dashboard', {
+                    headers: { 
+                        'Authorization': `Bearer ${localStorage.getItem(TOKEN_KEY)}` 
+                    }
+                });
+
+                if (!res.ok) {
+                    logout();
+                    return;
+                }
+
+                const data = await res.json();
+
+                document.getElementById('dNum').innerText = data.totalDonors;
+                document.getElementById('rNum').innerText = data.totalRecipients;
+                document.getElementById('cNum').innerText = `${Number(data.totalCashETB).toLocaleString()} ETB`;
+
+                const donorList = document.getElementById('recentDonorsList');
+                if (data.recentDonors && data.recentDonors.length > 0) {
+                    donorList.innerHTML = data.recentDonors.map(d => `
+                        <div class="list-item">
+                            <span><strong>${d.name}</strong> (${d.type})</span>
+                            <span style="color:#ffffff;">${d.type === 'Cash Contribution' ? d.amountETB + ' ETB' : 'Food Surplus'}</span>
+                        </div>
+                    `).join('');
+                }
+
+                const recipientList = document.getElementById('recentRecipientsList');
+                if (data.recentRecipients && data.recentRecipients.length > 0) {
+                    recipientList.innerHTML = data.recentRecipients.map(r => `
+                        <div class="list-item">
+                            <span><strong>${r.name}</strong> (${r.category})</span>
+                            <span style="color:var(--text-sub);">${r.location}</span>
+                        </div>
+                    `).join('');
+                }
+
+                document.getElementById('loginSec').style.display = 'none';
+                document.getElementById('dashSec').style.display = 'block';
+            } catch (err) {
+                console.error('Error loading dashboard:', err);
+                logout();
+            }
         }
 
         function logout() {
-            localStorage.removeItem('h_token');
+            localStorage.removeItem(TOKEN_KEY);
+            document.getElementById('u').value = '';
+            document.getElementById('p').value = '';
             document.getElementById('loginSec').style.display = 'block';
             document.getElementById('dashSec').style.display = 'none';
         }
