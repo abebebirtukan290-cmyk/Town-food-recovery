@@ -61,7 +61,7 @@
             font-size: 0.92rem;
         }
 
-        form label {
+        form label, .filter-container label {
             display: block;
             margin-top: 15px;
             font-weight: 500;
@@ -70,7 +70,7 @@
             text-transform: uppercase;
         }
 
-        input {
+        input, select {
             width: 100%;
             padding: 12px;
             margin-top: 6px;
@@ -82,7 +82,7 @@
             outline: none;
         }
 
-        input:focus {
+        input:focus, select:focus {
             border-color: #2e5946;
         }
 
@@ -112,6 +112,22 @@
 
         .logout-btn:hover {
             background-color: #421818;
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            background: #050d0a;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            margin-bottom: 20px;
+        }
+
+        .filter-container label {
+            margin-top: 0;
+            white-space: nowrap;
         }
 
         .grid {
@@ -200,6 +216,14 @@
         <div id="dashSec" style="display:none;">
             <p class="subtitle">Welcome, System Administrator <strong>Mr. Hachalu</strong></p>
             
+            <!-- Yearly Filter Dropdown Bar -->
+            <div class="filter-container">
+                <label for="yearFilter">Filter Report Year:</label>
+                <select id="yearFilter" onchange="loadDash()">
+                    <option value="">All Time</option>
+                </select>
+            </div>
+
             <div class="grid">
                 <div class="box">
                     <div class="box-title">Registered Donors</div>
@@ -269,7 +293,10 @@
 
         async function loadDash() {
             try {
-                const res = await fetch('/api/admin/dashboard', {
+                const selectedYear = document.getElementById('yearFilter').value;
+                const url = selectedYear ? `/api/admin/dashboard?year=${selectedYear}` : '/api/admin/dashboard';
+
+                const res = await fetch(url, {
                     headers: { 
                         'Authorization': `Bearer ${localStorage.getItem(TOKEN_KEY)}` 
                     }
@@ -281,6 +308,22 @@
                 }
 
                 const data = await res.json();
+
+                // Populate and preserve year selection dropdown options
+                const yearSelect = document.getElementById('yearFilter');
+                const currentSelection = yearSelect.value;
+                yearSelect.innerHTML = '<option value="">All Time</option>';
+                if (data.availableYears && data.availableYears.length > 0) {
+                    data.availableYears.forEach(y => {
+                        const opt = document.createElement('option');
+                        opt.value = y;
+                        opt.innerText = y;
+                        if (String(y) === String(currentSelection)) {
+                            opt.selected = true;
+                        }
+                        yearSelect.appendChild(opt);
+                    });
+                }
 
                 document.getElementById('dNum').innerText = data.totalDonors;
                 document.getElementById('rNum').innerText = data.totalRecipients;
@@ -294,6 +337,8 @@
                             <span style="color:#ffffff;">${d.type === 'Cash Contribution' ? d.amountETB + ' ETB' : 'Food Surplus'}</span>
                         </div>
                     `).join('');
+                } else {
+                    donorList.innerHTML = '<p style="color:var(--text-sub); font-size:0.85rem;">No recent donors recorded for this period.</p>';
                 }
 
                 const recipientList = document.getElementById('recentRecipientsList');
@@ -304,6 +349,8 @@
                             <span style="color:var(--text-sub);">${r.location}</span>
                         </div>
                     `).join('');
+                } else {
+                    recipientList.innerHTML = '<p style="color:var(--text-sub); font-size:0.85rem;">No recent recipients recorded for this period.</p>';
                 }
 
                 document.getElementById('loginSec').style.display = 'none';

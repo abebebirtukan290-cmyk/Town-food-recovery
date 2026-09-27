@@ -347,35 +347,33 @@
         }
 
         .faq-item {
-  background-color: var(--card-bg);
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  border: 1px solid var(--card-border);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid var(--card-border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-.faq-item h3 {
-  font-family: 'Bodoni Moda', serif;
-  color: #ffffff;
-  margin-bottom: 0; /* Keeps spacing clean when closed */
-  font-size: 1.15rem;
-}
+        .faq-item h3 {
+            font-family: 'Bodoni Moda', serif;
+            color: #ffffff;
+            margin-bottom: 0;
+            font-size: 1.15rem;
+        }
 
-/* Hide answer by default */
-.faq-item p {
-  display: none;
-  color: var(--text-sub);
-  font-size: 0.95rem;
-  margin-top: 10px;
-  line-height: 1.5;
-}
+        .faq-item p {
+            display: none;
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
 
-/* Show answer when active */
-.faq-item.active p {
-  display: block;
-}
+        .faq-item.active p {
+            display: block;
+        }
 
         footer {
             background-color: #000000;
@@ -393,29 +391,26 @@
     <!-- NAVIGATION -->
     <nav>
         <div class="brand-container" style="position: relative; display: inline-flex; align-items: center; gap: 10px;">
-  <!-- Background Watermark Emblem -->
-  <svg class="emblem-watermark" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="1" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); opacity: 0.15; pointer-events: none;">
-    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-    <path d="M2 17l10 5 10-5"></path>
-    <path d="M2 12l10 5 10-5"></path>
-  </svg>
+            <svg class="emblem-watermark" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="1" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); opacity: 0.15; pointer-events: none;">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                <path d="M2 17l10 5 10-5"></path>
+                <path d="M2 12l10 5 10-5"></path>
+            </svg>
 
-  <!-- Foreground Emblem & Title -->
-  <svg class="ambo-emblem" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 5px rgba(46,125,50,0.5)); z-index: 1;">
-    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-    <path d="M2 17l10 5 10-5"></path>
-    <path d="M2 12l10 5 10-5"></path>
-  </svg>
-  
-  <a href="#" class="brand-title" style="font-family: 'Bodoni Moda', serif; font-size: 1.6rem; font-weight: 700; color: #ffffff; text-decoration: none; z-index: 1;">
-    AMBO <span style="font-style: italic; color: #81c784;">FOOD RECOVERY</span>
-  </a>
-</div>
+            <svg class="ambo-emblem" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 5px rgba(46,125,50,0.5)); z-index: 1;">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                <path d="M2 17l10 5 10-5"></path>
+                <path d="M2 12l10 5 10-5"></path>
+            </svg>
+            
+            <a href="#" class="brand-title" style="font-family: 'Bodoni Moda', serif; font-size: 1.6rem; font-weight: 700; color: #ffffff; text-decoration: none; z-index: 1;">
+                AMBO <span style="font-style: italic; color: #81c784;">FOOD RECOVERY</span>
+            </a>
+        </div>
         <ul>
             <li><a href="#about-org">Organization</a></li>
             <li><a href="#categories">Categories</a></li>
             <li><a href="#portal">Portal</a></li>
-            <li><a href="#dashboard">Mr. Hachalu's Dashboard</a></li>
             <li><a href="#team">Our Team</a></li>
             <li><a href="#community">Community</a></li>
             <li><a href="#faq">FAQs</a></li>
@@ -423,7 +418,7 @@
         </ul>
     </nav>
 
-    <!-- HERO HEADER MATCHING SCREENSHOT -->
+    <!-- HERO HEADER -->
     <header class="hero">
         <h1>Stop Food Waste. Feed Ambo Town.</h1>
         <p>A sophisticated municipal framework bridging excess food and financial resources with verified local recipient centers across Ambo Town.</p>
@@ -537,36 +532,6 @@
             </div>
         </section>
 
-        <!-- PUBLIC DASHBOARD -->
-        <section id="dashboard" style="display: none;">
-            <h2 class="section-title">Administrative Control Dashboard</h2>
-            <div class="main-card">
-                <p style="color: #ffffff; font-weight: 500;">System Administrator: Mr. Hachalu | Municipal Oversight</p>
-                
-                <div class="stat-grid">
-                    <div class="stat-card">
-                        <h4>Total Active Donors</h4>
-                        <div class="number" id="statDonors">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <h4>Total Active Recipients</h4>
-                        <div class="number" id="statRecipients">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <h4>Total Cash Raised</h4>
-                        <div class="number" id="statCash">0 ETB</div>
-                    </div>
-                </div>
-
-                <div class="form-card" style="margin-top: 20px;">
-                    <h3 style="font-size: 1.1rem;">Live System Event Log</h3>
-                    <div id="adminLog" style="max-height: 180px; overflow-y: auto; margin-top: 10px;">
-                        <div class="feedback-entry">[System] Verification cycle active. Oversight: Mr. Hachalu.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- ABOUT US (TEAM PHOTO) -->
         <section id="team">
             <div class="main-card" style="text-align: center;">
@@ -669,16 +634,6 @@
     <!-- EMBEDDED JAVASCRIPT -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            fetchPublicStats();
-            
-            // Auto-check if Mr. Hachalu is logged in on page refresh
-            const savedToken = localStorage.getItem('adminToken');
-            if (savedToken) {
-                const dashboard = document.getElementById('dashboard');
-                if (dashboard) dashboard.style.display = 'block';
-                loadDashboardData(savedToken);
-            }
-
             // FAQ Interactive Toggle (Only one answer open at a time)
             const faqItems = document.querySelectorAll('.faq-item');
             faqItems.forEach(item => {
@@ -692,69 +647,6 @@
                 });
             });
         });
-
-        // Mr. Hachalu Admin Login Function
-        async function loginAdmin(username, password) {
-            try {
-                const response = await fetch('/api/admin/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, password })
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    localStorage.setItem('adminToken', data.token);
-                    const dashboard = document.getElementById('dashboard');
-                    if (dashboard) dashboard.style.display = 'block';
-                    loadDashboardData(data.token);
-                    alert('Welcome back, Mr. Hachalu!');
-                } else {
-                    alert(data.error || 'Invalid admin credentials.');
-                }
-            } catch (err) {
-                console.error('Login error:', err);
-            }
-        }
-
-        // Fetch Protected Dashboard Data for Mr. Hachalu
-        async function loadDashboardData(token) {
-            try {
-                const response = await fetch('/api/admin/dashboard', {
-                    method: 'GET',
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-
-                if (response.ok) {
-                    const stats = await response.json();
-                    if (document.getElementById('statRecipients')) {
-                        document.getElementById('statRecipients').innerText = stats.totalRecipients;
-                    }
-                    if (document.getElementById('statCash')) {
-                        document.getElementById('statCash').innerText = `${Number(stats.totalCashETB).toLocaleString()} ETB`;
-                    }
-                } else {
-                    console.error('Unauthorized access to admin dashboard.');
-                }
-            } catch (err) {
-                console.error('Failed to load admin dashboard:', err);
-            }
-        }
-
-        async function fetchPublicStats() {
-            try {
-                const res = await fetch('/api/public/stats');
-                if (res.ok) {
-                    const data = await res.json();
-                    document.getElementById('statDonors').innerText = data.totalDonors;
-                    document.getElementById('statRecipients').innerText = data.totalRecipients;
-                    document.getElementById('statCash').innerText = `${Number(data.totalCashETB).toLocaleString()} ETB`;
-                }
-            } catch (err) {
-                console.error('Failed to load public stats:', err);
-            }
-        }
 
         function toggleDonationType(val) {
             if (val === 'Cash Contribution') {
@@ -784,23 +676,15 @@
                 const res = await fetch('/api/donors', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, householdSize, income, type, details, amountETB })});
+                    body: JSON.stringify({ name, householdSize, income, type, details, amountETB })
+                });
 
                 const data = await res.json();
 
                 if (res.ok) {
                     alert('Thank you! Donor contribution saved to MongoDB.');
-                    const log = document.getElementById('adminLog');
-                    if (log) {
-                        const entry = document.createElement('div');
-                        entry.className = 'feedback-entry';
-                        entry.innerHTML = `[Saved to DB] ${name} submitted ${type}. Income verified (>5000 ETB).`;
-                        log.prepend(entry);
-                    }
-
                     this.reset();
                     toggleDonationType('Food Surplus');
-                    fetchPublicStats();
                 } else {
                     alert(data.error || 'Failed to submit donor record.');
                 }
@@ -833,37 +717,14 @@
 
                 if (res.ok) {
                     alert('Recipient allocation request saved to MongoDB!');
-                    const log = document.getElementById('adminLog');
-                    if (log) {
-                        const entry = document.createElement('div');
-                        entry.className = 'feedback-entry';
-                        entry.innerHTML = `[Saved to DB] ${name} requested food. Verified income (${income} ETB <= 5000 ETB).`;
-                        log.prepend(entry);
-                    }
-
                     this.reset();
-                    fetchPublicStats();
                 } else {
-                    alert(data.error || 'Failed to submit recipient request.');
+                    alert(data.error || 'Failed to submit recipient record.');
                 }
             } catch (err) {
                 alert('Network error communicating with server.');
             }
         });
-
-        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('fbName').value;
-            const msg = document.getElementById('fbMessage').value;
-
-            const list = document.getElementById('feedbackList');
-            const newEntry = document.createElement('div');
-            newEntry.className = 'feedback-entry';
-            newEntry.innerHTML = `<strong>${name}:</strong> ${msg}`;
-            list.prepend(newEntry);
-
-            this.reset();
-        });
-</script>
+    </script>
 </body>
 </html>

@@ -161,26 +161,45 @@ app.post('/api/admin/login', (req, res) => {
   return res.status(401).json({ success: false, error: 'Invalid admin credentials.' });
 });
 
-// 5. Protected Admin Dashboard Endpoint
+// 5. Protected Admin Dashboard Endpoint with Yearly Breakdown & Analytics
 app.get('/api/admin/dashboard', verifyAdminToken, async (req, res) => {
   try {
-    const totalDonors = await Donor.countDocuments();
-    const totalRecipients = await Recipient.countDocuments();
+    const { year } = req.query;
+    
+    // Build date filter if year is provided (e.g., ?year=2026)
+    let dateFilter = {};
+    if (year) {
+      const startDate = new Date(`${year}-01-01T00:00:00.000Z`);
+      const endDate = new Date(`${Number(year) + 1}-01-01T00:00:00.000Z`);
+      dateFilter = { createdAt: { $gte: startDate,$lt: endDate } };
+    }
+
+    const totalDonors = await Donor.countDocuments(dateFilter);
+    const totalRecipients = await Recipient.countDocuments(dateFilter);
 
     const cashTotal = await Donor.aggregate([
-      { $match: { type: 'Cash Contribution' } },
+      { $match: { ...dateFilter, type: 'Cash Contribution' } },
       { $group: { _id: null, total: { $sum: '$amountETB' } } }
     ]);
 
-    const recentDonors = await Donor.find().sort({ createdAt: -1 }).limit(5);
-    const recentRecipients = await Recipient.find().sort({ createdAt: -1 }).limit(5);
+    const recentDonors = await Donor.find(dateFilter).sort({ createdAt: -1 }).limit(5);
+    const recentRecipients = await Recipient.find(dateFilter).sort({ createdAt: -1 }).limit(5);
+
+    // Get available years for historical dropdown selection in admin.html
+    const donorYears = await Donor.aggregate([
+      { $project: { year: { $year: "$createdAt" } } },
+      { $group: { _id: "$year" } },
+      { $sort: { _id: -1 } }
+    ]);
 
     return res.json({
+      filterYear: year || 'All Time',
       totalDonors,
       totalRecipients,
       totalCashETB: cashTotal.length > 0 ? cashTotal[0].total : 0,
       recentDonors,
-      recentRecipients
+      recentRecipients,
+      availableYears: donorYears.map(y => y._id)
     });
   } catch (err) {
     console.error('Dashboard Error:', err);
