@@ -347,24 +347,35 @@
         }
 
         .faq-item {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            border: 1px solid var(--card-border);
-        }
+  background-color: var(--card-bg);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border: 1px solid var(--card-border);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-        .faq-item h3 {
-            font-family: 'Bodoni Moda', serif;
-            color: #ffffff;
-            margin-bottom: 8px;
-            font-size: 1.15rem;
-        }
+.faq-item h3 {
+  font-family: 'Bodoni Moda', serif;
+  color: #ffffff;
+  margin-bottom: 0; /* Keeps spacing clean when closed */
+  font-size: 1.15rem;
+}
 
-        .faq-item p {
-            color: var(--text-sub);
-            font-size: 0.95rem;
-        }
+/* Hide answer by default */
+.faq-item p {
+  display: none;
+  color: var(--text-sub);
+  font-size: 0.95rem;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+/* Show answer when active */
+.faq-item.active p {
+  display: block;
+}
 
         footer {
             background-color: #000000;
@@ -381,7 +392,25 @@
 
     <!-- NAVIGATION -->
     <nav>
-        <div class="logo">Ambo Food <span>Recovery</span></div>
+        <div class="brand-container" style="position: relative; display: inline-flex; align-items: center; gap: 10px;">
+  <!-- Background Watermark Emblem -->
+  <svg class="emblem-watermark" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="1" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); opacity: 0.15; pointer-events: none;">
+    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+    <path d="M2 17l10 5 10-5"></path>
+    <path d="M2 12l10 5 10-5"></path>
+  </svg>
+
+  <!-- Foreground Emblem & Title -->
+  <svg class="ambo-emblem" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 5px rgba(46,125,50,0.5)); z-index: 1;">
+    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+    <path d="M2 17l10 5 10-5"></path>
+    <path d="M2 12l10 5 10-5"></path>
+  </svg>
+  
+  <a href="#" class="brand-title" style="font-family: 'Bodoni Moda', serif; font-size: 1.6rem; font-weight: 700; color: #ffffff; text-decoration: none; z-index: 1;">
+    AMBO <span style="font-style: italic; color: #81c784;">FOOD RECOVERY</span>
+  </a>
+</div>
         <ul>
             <li><a href="#about-org">Organization</a></li>
             <li><a href="#categories">Categories</a></li>
@@ -509,7 +538,7 @@
         </section>
 
         <!-- PUBLIC DASHBOARD -->
-        <section id="dashboard">
+        <section id="dashboard" style="display: none;">
             <h2 class="section-title">Administrative Control Dashboard</h2>
             <div class="main-card">
                 <p style="color: #ffffff; font-weight: 500;">System Administrator: Mr. Hachalu | Municipal Oversight</p>
@@ -569,8 +598,8 @@
                     <p style="color: var(--text-sub); font-size: 0.85rem;">Logistics Advisor</p>
                 </div>
                 <div class="profile-card">
-                    <img src="images/ms_marsimoy_shawul.jpg" alt="Ms. Marsimoy Shawul" onerror="this.src='https://via.placeholder.com/90?text=Marsimoy+Shawul'">
-                    <h4 style="color: #ffffff;">Ms. Marsimoy Shawul</h4>
+                    <img src="images/ms_fenet_dereje.jpg" alt="Ms. Fenet Dereje" onerror="this.src='https://via.placeholder.com/90?text=Fenet+Dereje'">
+                    <h4 style="color: #ffffff;">Ms. Fenet Dereje</h4>
                     <p style="color: var(--text-sub); font-size: 0.85rem;">Public Liaison</p>
                 </div>
             </div>
@@ -596,7 +625,7 @@
                             <strong>Mr. Tena Feyisa:</strong> Distribution in District 2 verified successfully.
                         </div>
                         <div class="feedback-entry">
-                            <strong>Ms. Marsimoy Shawul:</strong> Donor registration operating smoothly.
+                            <strong>Ms. Fenet Dereje:</strong> Donor registration operating smoothly.
                         </div>
                         <div class="feedback-entry">
                             <strong>Mr. Dechasa Yadeta:</strong> Verified municipal schedules with regional officers.
@@ -639,7 +668,79 @@
 
     <!-- EMBEDDED JAVASCRIPT -->
     <script>
-        document.addEventListener('DOMContentLoaded', fetchPublicStats);
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchPublicStats();
+            
+            // Auto-check if Mr. Hachalu is logged in on page refresh
+            const savedToken = localStorage.getItem('adminToken');
+            if (savedToken) {
+                const dashboard = document.getElementById('dashboard');
+                if (dashboard) dashboard.style.display = 'block';
+                loadDashboardData(savedToken);
+            }
+
+            // FAQ Interactive Toggle (Only one answer open at a time)
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    item.classList.toggle('active');
+                });
+            });
+        });
+
+        // Mr. Hachalu Admin Login Function
+        async function loginAdmin(username, password) {
+            try {
+                const response = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    localStorage.setItem('adminToken', data.token);
+                    const dashboard = document.getElementById('dashboard');
+                    if (dashboard) dashboard.style.display = 'block';
+                    loadDashboardData(data.token);
+                    alert('Welcome back, Mr. Hachalu!');
+                } else {
+                    alert(data.error || 'Invalid admin credentials.');
+                }
+            } catch (err) {
+                console.error('Login error:', err);
+            }
+        }
+
+        // Fetch Protected Dashboard Data for Mr. Hachalu
+        async function loadDashboardData(token) {
+            try {
+                const response = await fetch('/api/admin/dashboard', {
+                    method: 'GET',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (response.ok) {
+                    const stats = await response.json();
+                    if (document.getElementById('statRecipients')) {
+                        document.getElementById('statRecipients').innerText = stats.totalRecipients;
+                    }
+                    if (document.getElementById('statCash')) {
+                        document.getElementById('statCash').innerText = `${Number(stats.totalCashETB).toLocaleString()} ETB`;
+                    }
+                } else {
+                    console.error('Unauthorized access to admin dashboard.');
+                }
+            } catch (err) {
+                console.error('Failed to load admin dashboard:', err);
+            }
+        }
 
         async function fetchPublicStats() {
             try {
@@ -683,18 +784,19 @@
                 const res = await fetch('/api/donors', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, householdSize, income, type, details, amountETB })
-                });
+                    body: JSON.stringify({ name, householdSize, income, type, details, amountETB })});
 
                 const data = await res.json();
 
                 if (res.ok) {
                     alert('Thank you! Donor contribution saved to MongoDB.');
                     const log = document.getElementById('adminLog');
-                    const entry = document.createElement('div');
-                    entry.className = 'feedback-entry';
-                    entry.innerHTML = `[Saved to DB] ${name} submitted ${type}. Income verified (>5000 ETB).`;
-                    log.prepend(entry);
+                    if (log) {
+                        const entry = document.createElement('div');
+                        entry.className = 'feedback-entry';
+                        entry.innerHTML = `[Saved to DB] ${name} submitted ${type}. Income verified (>5000 ETB).`;
+                        log.prepend(entry);
+                    }
 
                     this.reset();
                     toggleDonationType('Food Surplus');
@@ -732,10 +834,12 @@
                 if (res.ok) {
                     alert('Recipient allocation request saved to MongoDB!');
                     const log = document.getElementById('adminLog');
-                    const entry = document.createElement('div');
-                    entry.className = 'feedback-entry';
-                    entry.innerHTML = `[Saved to DB] ${name} requested food. Verified income (${income} ETB <= 5000 ETB).`;
-                    log.prepend(entry);
+                    if (log) {
+                        const entry = document.createElement('div');
+                        entry.className = 'feedback-entry';
+                        entry.innerHTML = `[Saved to DB] ${name} requested food. Verified income (${income} ETB <= 5000 ETB).`;
+                        log.prepend(entry);
+                    }
 
                     this.reset();
                     fetchPublicStats();
@@ -760,6 +864,6 @@
 
             this.reset();
         });
-    </script>
+</script>
 </body>
 </html>
